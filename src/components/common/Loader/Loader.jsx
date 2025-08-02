@@ -1,0 +1,11 @@
+import { PulseLoader } from 'react-spinners'
+
+const Loader = () => {
+	return (
+		<div className='fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-[10000]'>
+			<PulseLoader color='var(--accent-orange)' size={20} />
+		</div>
+	)
+}
+
+export default Loader
