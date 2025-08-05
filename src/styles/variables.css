@@ -6,4 +6,6 @@
 	--error-red: #ef2447;
 	--success-green: #08aa83;
 	--neutral-bg: #f9f9f9;
+	--light-grey: rgba(38, 38, 38, 0.15);
+	--grey-30: rgba(38, 38, 38, 0.3);
 }

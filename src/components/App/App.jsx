@@ -26,76 +26,57 @@ const NotFoundPage = lazy(() =>
 
 function App() {
 	return (
-		<Suspense fallback={<Loader />}>
-			<Routes>
-				<Route path='/' element={<MainPage />} />
-				<Route
-					path='/home'
-					element={
-						<PrivateRouters redirectTo='/login'>
-							<HomePage />
-						</PrivateRouters>
-					}
-				/>
-				<Route
-					path='/news'
-					element={
-						<PrivateRouters redirectTo='/login'>
-							<NewsPage />
-						</PrivateRouters>
-					}
-				/>
-				<Route
-					path='/notices'
-					element={
-						<PrivateRouters redirectTo='/login'>
-							<NoticesPage />
-						</PrivateRouters>
-					}
-				/>
-				<Route
-					path='/friends'
-					element={
-						<PrivateRouters redirectTo='/login'>
-							<FriendsPage />
-						</PrivateRouters>
-					}
-				/>
-				<Route
-					path='/profile'
-					element={
-						<PrivateRouters redirectTo='/login'>
-							<ProfilePage />
-						</PrivateRouters>
-					}
-				/>
-				<Route
-					path='/add-pet'
-					element={
-						<PrivateRouters redirectTo='/login'>
-							<AddPetPage />
-						</PrivateRouters>
-					}
-				/>
-				<Route
-					path='/register'
-					element={
-						<RestrictedRoutes redirectTo='/'>
-							<RegisterPage />
-						</RestrictedRoutes>
-					}
-				/>
-				<Route
-					path='/login'
-					element={
-						<RestrictedRoutes redirectTo='/'>
-							<LoginPage />
-						</RestrictedRoutes>
-					}
-				/>
-				<Route path='*' element={<NotFoundPage />} />
-			</Routes>
-		</Suspense>
+		<>
+			<Suspense fallback={<Loader />}>
+				<Routes>
+					<Route path='/' element={<MainPage />} />
+					<Route path='/home' element={<HomePage />} />
+					<Route path='/news' element={<NewsPage />} />
+					<Route
+						path='/notices'
+						element={
+							<PrivateRouters redirectTo='/login'>
+								<NoticesPage />
+							</PrivateRouters>
+						}
+					/>
+					<Route path='/friends' element={<FriendsPage />} />
+					<Route
+						path='/profile'
+						element={
+							<PrivateRouters redirectTo='/login'>
+								<ProfilePage />
+							</PrivateRouters>
+						}
+					/>
+					<Route
+						path='/add-pet'
+						element={
+							<PrivateRouters redirectTo='/login'>
+								<AddPetPage />
+							</PrivateRouters>
+						}
+					/>
+					<Route
+						path='/register'
+						element={
+							<RestrictedRoutes redirectTo='/'>
+								<RegisterPage />
+							</RestrictedRoutes>
+						}
+					/>
+					<Route
+						path='/login'
+						element={
+							<RestrictedRoutes redirectTo='/'>
+								<LoginPage />
+							</RestrictedRoutes>
+						}
+					/>
+					<Route path='*' element={<NotFoundPage />} />
+				</Routes>
+			</Suspense>
+		</>
 	)
 }
 

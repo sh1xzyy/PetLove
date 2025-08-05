@@ -64,10 +64,10 @@ img {
 	overflow: hidden;
 }
 
-body[data-scroll='scroll'] .scrollWrapper {
+body[data-scroll='scroll'] {
 	overflow-y: auto;
 }
 
-body[data-scroll='no-scroll'] .scrollWrapper {
+body[data-scroll='no-scroll'] {
 	overflow: hidden;
 }
