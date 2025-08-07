@@ -1,9 +1,5 @@
 const PetBlock = ({ children }) => {
-	return (
-		<div className='rounded-[30px] bg-accent-orange'>
-			<div>{children}</div>
-		</div>
-	)
-}
+  return <div className="rounded-[60px] bg-accent-orange">{children}</div>;
+};
 
-export default PetBlock
+export default PetBlock;
