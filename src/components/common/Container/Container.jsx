@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import clsx from "clsx";
 
 // Общий контейнер
 // Если ширина viewport больше 1280 нужно обязательно указать атрибут type,
@@ -17,4 +17,4 @@ const Container = ({ type, children }) => {
 	)
 }
 
-export default Container
+export default Container;
