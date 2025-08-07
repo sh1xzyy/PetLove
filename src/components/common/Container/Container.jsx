@@ -7,8 +7,8 @@ const Container = ({ type, children }) => {
   return (
     <div
       className={clsx(
-        "m-auto w-[375px] bg-amber-100 px-[20px] md:w-[768px] md:px-[32px]",
-        (type === "list" || type === "header") && "lg:w-[1217px]",
+        "m-auto w-[375px] px-[20px] md:w-[768px] md:px-[32px]",
+        (type === "list" || type === "header") && "lg:w-[1217px] lg:px-[64px]",
         type === "common" && "lg:w-[1280px]",
       )}
     >
