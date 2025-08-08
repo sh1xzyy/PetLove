@@ -1,10 +1,21 @@
-import { defaultValues } from './defaultValues'
-import { validationSchema } from './validationSchema'
+import { useDispatch } from "react-redux";
+import { addPetThunk } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
-export const useAddPetForm = () => {
-	const onSubmit = async value => {
-		console.log(value)
-	}
+export const useAddPetForm = (reset) => {
+  const dispatch = useDispatch();
 
-	return { defaultValues, onSubmit, validationSchema }
-}
+  const onSubmit = async (value) => {
+    try {
+      await dispatch(addPetThunk(value)).unwrap();
+      toast.success("Successfully added a new pet!");
+      reset();
+    } catch (error) {
+      reset();
+      toast.error("Sorry something went wrong!");
+      console.log(error);
+    }
+  };
+
+  return { onSubmit };
+};

@@ -3,32 +3,30 @@ import Loader from "../common/Loader/Loader";
 import { Route, Routes } from "react-router";
 import PrivateRouters from "../closedRoutes/PrivateRouters";
 import RestrictedRoutes from "../closedRoutes/RestrictedRoutes";
-import { Toaster } from "react-hot-toast";
 const MainPage = lazy(() => import("../../pages/MainPage/MainPage"));
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const NewsPage = lazy(() => import("../../pages/NewsPage/NewsPage"));
-const NoticesPage = lazy(() =>
-  import("../../pages/NoticesPage/NoticesPage.jsx")
+const NoticesPage = lazy(
+  () => import("../../pages/NoticesPage/NoticesPage.jsx"),
 );
-const FriendsPage = lazy(() =>
-  import("../../pages/FriendsPage/FriendsPage.jsx")
+const FriendsPage = lazy(
+  () => import("../../pages/FriendsPage/FriendsPage.jsx"),
 );
-const ProfilePage = lazy(() =>
-  import("../../pages/ProfilePage/ProfilePage.jsx")
+const ProfilePage = lazy(
+  () => import("../../pages/ProfilePage/ProfilePage.jsx"),
 );
 const AddPetPage = lazy(() => import("../../pages/AddPetPage/AddPetPage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
-const RegisterPage = lazy(() =>
-  import("../../pages/RegisterPage/RegisterPage.jsx")
+const RegisterPage = lazy(
+  () => import("../../pages/RegisterPage/RegisterPage.jsx"),
 );
-const NotFoundPage = lazy(() =>
-  import("../../pages/NotFoundPage/NotFoundPage.jsx")
+const NotFoundPage = lazy(
+  () => import("../../pages/NotFoundPage/NotFoundPage.jsx"),
 );
 
 function App() {
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<MainPage />} />
