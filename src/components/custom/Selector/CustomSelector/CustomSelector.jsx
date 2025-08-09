@@ -1,12 +1,13 @@
 import Select from "react-select";
 import DropdownIndicator from "../DropDownIndicator/DropDownIndicator";
-import "./custom-select.css";
 import { customStyles } from "./customStyles";
 import { useFormContext, Controller } from "react-hook-form";
-import { correctOptionsFormat } from "../../../../utils/addPet/correctOptionsFormat";
+import { correctOptionsFormat } from "../../../../utils/common/correctOptionsFormat";
 
-const CustomSelector = ({ name, placeholder }) => {
+const CustomSelector = ({ name, placeholder, options, additionalStyles }) => {
   const { control } = useFormContext();
+
+  const { optionsPrettier } = correctOptionsFormat(options);
 
   return (
     <Controller
@@ -15,15 +16,13 @@ const CustomSelector = ({ name, placeholder }) => {
       render={({ field }) => (
         <Select
           {...field}
-          options={correctOptionsFormat}
-          styles={customStyles}
+          options={optionsPrettier}
+          styles={{ ...customStyles, ...additionalStyles }}
           components={{ DropdownIndicator }}
           placeholder={placeholder}
           value={
             field.value
-              ? correctOptionsFormat.find(
-                  (option) => option.value === field.value,
-                )
+              ? optionsPrettier.find((option) => option.value === field.value)
               : null
           }
           onChange={(selectedOption) => field.onChange(selectedOption.value)}
