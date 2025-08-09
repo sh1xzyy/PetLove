@@ -8,11 +8,15 @@ import UploadPhotoBtn from "./AddPetFormParts/UploadPhotoBtn";
 import PetsNameField from "./AddPetFormParts/PetsNameField";
 import PetsTypeSelector from "./AddPetFormParts/PetsTypeSelector";
 import ActionsBtns from "./AddPetFormParts/ActionsBtns";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PhotoPreview from "./AddPetFormParts/PhotoPreview";
 import { useAddPetForm } from "../../../features/addPet/useAddPetForm";
 import { validationSchema } from "../../../features/addPet/validationSchema";
 import { defaultValues } from "../../../features/addPet/defaultValues";
+import { useDispatch, useSelector } from "react-redux";
+import { getPetsSpeciesThunk } from "../../../redux/notices/operations";
+import toast from "react-hot-toast";
+import { selectPetsSpecies } from "../../../redux/notices/selectors";
 
 const AddPetForm = () => {
   const methods = useForm({
@@ -21,9 +25,22 @@ const AddPetForm = () => {
     defaultValues,
   });
   const [hasUserSelectPhoto, setHasUserSelectPhoto] = useState(false);
+  const species = useSelector(selectPetsSpecies);
   const { reset } = methods;
   const { onSubmit } = useAddPetForm(reset);
   const fileInputRef = useRef(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getPetsSpeciesThunk()).unwrap();
+      } catch (error) {
+        toast.error("Something went wrong with uploading categories", error);
+      }
+    };
+    fetchData();
+  }, [dispatch]);
 
   return (
     <div className="rounded-[30px] bg-light-white px-[20px] pb-[20px] pt-[28px] md:rounded-[60px] md:px-[136px] md:py-[40px] lg:px-[80px] lg:py-[60px]">
@@ -77,7 +94,7 @@ const AddPetForm = () => {
                 <PetsBirthDateField />
               </div>
               <div className="relative">
-                <PetsTypeSelector />
+                <PetsTypeSelector species={species} />
               </div>
             </div>
           </div>
