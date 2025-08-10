@@ -26,3 +26,4 @@ const NotFoundCards = ({ text }) => {
 };
 
 export default NotFoundCards;
+// Привет)
