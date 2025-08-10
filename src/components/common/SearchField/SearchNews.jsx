@@ -1,34 +1,43 @@
 import { IoClose } from "react-icons/io5";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
-const SearchNews = ({ onSearch, inputValue, setInputValue }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!inputValue.trim()) {
+const SearchNews = ({ onSearch, placeholder }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm({
+    defaultValues: { search: "" },
+  });
+
+  const onSubmit = (data) => {
+    const searchValue = data.search.trim();
+    if (!searchValue) {
       toast.error("Enter something");
       return;
     }
-    if (onSearch) onSearch(inputValue);
+    if (onSearch) onSearch(searchValue);
   };
 
   const handleReset = () => {
-    setInputValue("");
+    reset({ search: "" });
     if (onSearch) onSearch("");
   };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="relative flex w-full items-center md:max-w-[230px]"
     >
       <input
         type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Search..."
+        {...register("search")}
+        placeholder={placeholder}
         className="h-[42px] w-full max-w-[335px] rounded-[30px] border border-[--grey-15] py-[12px] pl-[12px] pr-[56px] outline-none transition hover:border-[--accent-orange] focus:border-[--accent-orange] active:border-[--accent-orange] md:h-[48px] md:max-w-[230px] md:py-[14px] md:pl-[14px] md:pr-[60px]"
       />
-      {inputValue && (
+      {isDirty && (
         <button
           type="button"
           onClick={handleReset}
