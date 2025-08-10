@@ -2,7 +2,6 @@ import Container from "../../components/common/Container/Container";
 import Title from "../../components/common/Title/Title";
 import NoticesFilters from "../../components/notices/NoticesFilters/NoticesFilters";
 import NoticesList from "../../components/notices/NoticesList/NoticesList";
-import ModalAttention from "../../components/common/ModalAttention/ModalAttention";
 
 const NoticesPage = () => {
   return (
@@ -11,7 +10,7 @@ const NoticesPage = () => {
         <Container type="common">
           <Title
             text="Find your favorite pet"
-            styles="font-bold text-[28px] md:text-[54px] leading-1 tracking-[-0.03em] text-gray-900 pb-[40px] md:pb-[44px] lg:pb-[40px]"
+            styles="mb-[40px] md:mb-[44px] lg:mb-[40px]"
           />
           <NoticesFilters />
         </Container>

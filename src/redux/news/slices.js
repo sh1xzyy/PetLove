@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchNewsThunk } from "../operations/newsOperations";
+import { fetchNewsThunk } from "./operations";
 
 const newsSlice = createSlice({
   name: "news",

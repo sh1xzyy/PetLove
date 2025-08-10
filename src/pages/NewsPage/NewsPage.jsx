@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
-import { fetchNewsThunk } from "../../redux/operations/newsOperations";
-import { resetNews } from "../../redux/slices/newsSlice";
+import NewsList from "../../components/news/NewsList/NewsList";
+import Container from "../../components/common/Container/Container";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectPage,
   selectTotalPages,
-} from "../../redux/selectors/newsSelectors";
-import { useDispatch, useSelector } from "react-redux";
-import NewsList from "../../components/NewsList/NewsList";
-import Container from "../../components/common/Container/Container";
+  selectNews,
+} from "../../redux/news/selectors";
+import { fetchNewsThunk } from "../../redux/news/operations";
+import { resetNews } from "../../redux/news/slices";
+import Title from "../../components/common/Title/Title";
+import SearchNews from "../../components/common/SearchField/SearchNews";
+import NotFoundCards from "../../components/common/NotFoundCards/NotFoundCards";
+import Pagination from "../../components/common/Pagination/Pagination";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
   const totalPages = useSelector(selectTotalPages);
+  const news = useSelector(selectNews);
   const [keyword, setKeyword] = useState("");
   const [inputValue, setInputValue] = useState("");
 
@@ -23,9 +29,8 @@ const NewsPage = () => {
     };
   }, [dispatch, keyword]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setKeyword(inputValue);
+  const handleSearch = (value) => {
+    setKeyword(value);
   };
 
   const handlePageChange = (newPage) => {
@@ -36,46 +41,27 @@ const NewsPage = () => {
     <section>
       <Container type="common">
         <div className="flex flex-col pb-[80px] pt-[54px] md:pt-[85px] lg:px-[32px] lg:pt-[96px]">
-          <div className="mb-[24px] flex flex-row items-center justify-between md:mb-[44px] lg:mb-[60px]">
-            <h2 className="font-['var(--font-family)'] text-[28px] font-bold leading-[100%] tracking-[-0.03em] text-[var(--gray-900)] lg:text-[54px]">
-              News
-            </h2>
-            <form onSubmit={handleSearch} className="flex items-center">
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Search news..."
-                className="rounded-lg border px-4 py-2"
+          <div className="mb-[24px] flex flex-col justify-between gap-[20px] md:mb-[44px] md:flex-row md:items-center md:gap-0 lg:mb-[60px]">
+            <Title text="News" />
+            <SearchNews
+              onSearch={handleSearch}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              placeholder="Search..."
+            />
+          </div>
+          {keyword && news.length === 0 ? (
+            <NotFoundCards text="Nothing found for your parameters" />
+          ) : (
+            <>
+              <NewsList />
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
               />
-              <button
-                type="submit"
-                className="ml-2 rounded-lg bg-blue-500 px-4 py-2 text-white"
-              >
-                Search
-              </button>
-            </form>
-          </div>
-          <NewsList />
-          <div className="mt-8 flex justify-center">
-            <button
-              onClick={() => handlePageChange(page - 1)}
-              disabled={page === 1}
-              className="mr-2 rounded bg-gray-200 px-4 py-2 disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <span className="px-4 py-2">
-              Page {page} of {totalPages}
-            </span>
-            <button
-              onClick={() => handlePageChange(page + 1)}
-              disabled={page === totalPages}
-              className="ml-2 rounded bg-gray-200 px-4 py-2 disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+            </>
+          )}
         </div>
       </Container>
     </section>
