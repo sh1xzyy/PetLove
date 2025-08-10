@@ -12,6 +12,7 @@ import { resetNews } from "../../redux/news/slices";
 import Title from "../../components/common/Title/Title";
 import SearchNews from "../../components/common/SearchField/SearchNews";
 import NotFoundCards from "../../components/common/NotFoundCards/NotFoundCards";
+import Pagination from "../../components/common/Pagination/Pagination";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
@@ -54,25 +55,11 @@ const NewsPage = () => {
           ) : (
             <>
               <NewsList />
-              <div className="mt-8 flex justify-center">
-                <button
-                  onClick={() => handlePageChange(page - 1)}
-                  disabled={page === 1}
-                  className="mr-2 rounded bg-gray-200 px-4 py-2 disabled:opacity-50"
-                >
-                  Previous
-                </button>
-                <span className="px-4 py-2">
-                  Page {page} of {totalPages}
-                </span>
-                <button
-                  onClick={() => handlePageChange(page + 1)}
-                  disabled={page === totalPages}
-                  className="ml-2 rounded bg-gray-200 px-4 py-2 disabled:opacity-50"
-                >
-                  Next
-                </button>
-              </div>
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </>
           )}
         </div>
