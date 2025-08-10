@@ -6,18 +6,18 @@ import {
   selectPage,
   selectTotalPages,
   selectNews,
-} from "../../redux/news/selectors"; // Добавлен selectNews
+} from "../../redux/news/selectors";
 import { fetchNewsThunk } from "../../redux/news/operations";
 import { resetNews } from "../../redux/news/slices";
-import Title from "../../components/news/Title/Title";
-import SearchNews from "../../components/news/SearchNews/SearchNews";
-import NotFoundNews from "../../components/news/NotFoundNews/NotFoundNews";
+import Title from "../../components/common/Title/Title";
+import SearchNews from "../../components/common/SearchField/SearchNews";
+import NotFoundCards from "../../components/common/NotFoundCards/NotFoundCards";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
   const totalPages = useSelector(selectTotalPages);
-  const news = useSelector(selectNews); // Селектор для списка новостей
+  const news = useSelector(selectNews);
   const [keyword, setKeyword] = useState("");
   const [inputValue, setInputValue] = useState("");
 
@@ -46,10 +46,11 @@ const NewsPage = () => {
               onSearch={handleSearch}
               inputValue={inputValue}
               setInputValue={setInputValue}
+              placeholder="Search..."
             />
           </div>
           {keyword && news.length === 0 ? (
-            <NotFoundNews />
+            <NotFoundCards text="Nothing found for your parameters" />
           ) : (
             <>
               <NewsList />
