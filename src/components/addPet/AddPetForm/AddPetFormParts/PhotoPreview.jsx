@@ -21,7 +21,7 @@ const PhotoPreview = ({
       />
       {hasUserSelectPhoto && imgURL ? (
         <img
-          className="h-[68px] w-[68px] rounded-[50%] object-fill md:h-[86px] md:w-[86px]"
+          className="h-[68px] w-[68px] rounded-full object-fill md:h-[86px] md:w-[86px]"
           src={imgURL}
           alt="preview"
         />
