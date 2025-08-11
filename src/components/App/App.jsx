@@ -3,6 +3,8 @@ import Loader from "../common/Loader/Loader";
 import { Route, Routes } from "react-router";
 import PrivateRouters from "../closedRoutes/PrivateRouters";
 import RestrictedRoutes from "../closedRoutes/RestrictedRoutes";
+import { useModalAttentionContext } from "../../contexts/ModalAttentionContext/useModalAttentionContext.jsx";
+import ModalAttention from "../common/ModalAttention/ModalAttention.jsx";
 const MainPage = lazy(() => import("../../pages/MainPage/MainPage"));
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const NewsPage = lazy(() => import("../../pages/NewsPage/NewsPage"));
@@ -25,8 +27,14 @@ const NotFoundPage = lazy(
 );
 
 function App() {
+  const { isAttentionModalOpen, setIsAttentionModalOpen } =
+    useModalAttentionContext();
+
   return (
     <>
+      {isAttentionModalOpen && (
+        <ModalAttention setIsModalOpen={setIsAttentionModalOpen} />
+      )}
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<MainPage />} />

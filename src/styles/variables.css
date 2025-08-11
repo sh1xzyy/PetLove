@@ -1,5 +1,7 @@
 :root {
   --accent-orange: #f6b83d;
+  --star-orange: #ffc531;
+  --dark-orange: #fbe7c1;
   --bg-cream: #fff4df;
   --light-white: #ffffff;
   --error-red: #ef2447;
@@ -9,8 +11,9 @@
   --bg-female-selected: #f43f5e;
   --bg-male: rgba(84, 173, 255, 0.1);
   --bg-male-selected: #54adff;
-  --gray-900: #262626;
   --light-grey: #f2f4f7;
+  --gray-900: #262626;
+  --grey-800: #2b2b2a;
   --grey-20: rgba(38, 38, 38, 0.2);
   --grey-30: rgba(38, 38, 38, 0.3);
   --grey-40: rgba(43, 43, 42, 0.4);

@@ -62,7 +62,7 @@ const AddPetForm = () => {
 
             {/* Photo Preview */}
             <div
-              className="relative m-auto mb-[6px] flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-[50%] bg-bg-cream md:-mb-[6px] md:h-[86px] md:w-[86px]"
+              className="relative m-auto mb-[6px] flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full bg-bg-cream md:-mb-[6px] md:h-[86px] md:w-[86px]"
               onClick={() => fileInputRef.current?.click()}
             >
               <PhotoPreview
