@@ -23,7 +23,6 @@ export const addPet = async (body) => {
 };
 
 // Notices/*
-// Notices Pets Categories
 export const getPetsCategories = async () => {
   try {
     const response = await axios.get(`${API_KEY}/notices/categories`, {
@@ -38,7 +37,6 @@ export const getPetsCategories = async () => {
   }
 };
 
-// Notices Pets Sex
 export const getPetsSex = async () => {
   try {
     const response = await axios.get(`${API_KEY}/notices/sex`, {
@@ -53,7 +51,6 @@ export const getPetsSex = async () => {
   }
 };
 
-// Notices Pets Species
 export const getPetsSpecies = async () => {
   try {
     const response = await axios.get(`${API_KEY}/notices/species`, {
@@ -79,10 +76,24 @@ export const fetchNews = async ({ keyword = "", page = 1, limit = 6 }) => {
         limit,
       },
     });
-
     console.log("ResponseData:", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to fetch news");
+  }
+};
+
+// Fetch Friends
+export const fetchFriends = async () => {
+  try {
+    const response = await axios.get(`${API_KEY}/friends`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("ResponseData: Friends", response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Failed to fetch friends");
   }
 };
