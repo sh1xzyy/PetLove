@@ -32,6 +32,9 @@ export default {
           "100%": { opacity: 1 },
         },
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+      },
     },
     screens: {
       sm: "375px",

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { addPetThunk } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
+import { addPetThunk } from "../../../redux/users/operations";
 
 export const useAddPetForm = (reset) => {
   const dispatch = useDispatch();
@@ -12,8 +12,7 @@ export const useAddPetForm = (reset) => {
       reset();
     } catch (error) {
       reset();
-      toast.error("Sorry something went wrong!");
-      console.log(error);
+      toast.error(error);
     }
   };
 

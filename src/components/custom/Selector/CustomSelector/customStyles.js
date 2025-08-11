@@ -14,6 +14,9 @@ export const customStyles = {
     "&:focus": {
       borderColor: "var(--accent-orange)",
     },
+    "@media screen and (min-width: 768px)": {
+      height: "52px",
+    },
   }),
   singleValue: (provided) => ({
     ...provided,
@@ -88,9 +91,5 @@ export const customStyles = {
     "@media screen and (min-width: 768px)": {
       right: "6px",
     },
-  }),
-  clearIndicator: (provided) => ({
-    ...provided,
-    paddingRight: "20px",
   }),
 };

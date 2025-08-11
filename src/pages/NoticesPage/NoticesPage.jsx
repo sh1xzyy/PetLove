@@ -1,3 +1,4 @@
+import { Outlet } from "react-router";
 import Container from "../../components/common/Container/Container";
 import Title from "../../components/common/Title/Title";
 import NoticesFilters from "../../components/notices/NoticesFilters/NoticesFilters";
@@ -18,6 +19,7 @@ const NoticesPage = () => {
       <section className="pt-[20px] md:pb-[88px] md:pt-[16px] lg:pb-[80px] lg:pt-[20px]">
         <Container type="list">
           <NoticesList />
+          <Outlet />
         </Container>
       </section>
     </>

@@ -35,6 +35,7 @@ const ModalAttention = ({ setIsModalOpen }) => {
               "bg-accent-orange text-light-white hover:bg-bg-cream hover:text-accent-orange",
             )}
             to="/login"
+            onClick={() => setIsModalOpen(false)}
           >
             Log In
           </Link>
@@ -44,6 +45,7 @@ const ModalAttention = ({ setIsModalOpen }) => {
               "bg-bg-cream text-accent-orange hover:bg-dark-orange",
             )}
             to="/register"
+            onClick={() => setIsModalOpen(false)}
           >
             Registration
           </Link>

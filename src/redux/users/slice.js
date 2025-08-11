@@ -17,7 +17,7 @@ const initialState = {
 };
 
 const slice = createSlice({
-  name: "auth",
+  name: "users",
   initialState,
   extraReducers: (builder) => {
     builder
@@ -33,4 +33,4 @@ const slice = createSlice({
   },
 });
 
-export const authReducer = slice.reducer;
+export const usersReducer = slice.reducer;

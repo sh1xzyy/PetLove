@@ -23,8 +23,8 @@ const NoticesList = () => {
   return (
     <>
       <ul className="mb-[44px] flex flex-wrap gap-x-[20px] gap-y-[20px] md:mb-[60px] lg:gap-x-[32px] lg:gap-y-[40px]">
-        {petsList.map(({ _id, ...args }) => {
-          return <NoticesItem data={args} key={_id} />;
+        {petsList.map((data) => {
+          return <NoticesItem data={data} key={data._id} />;
         })}
       </ul>
     </>

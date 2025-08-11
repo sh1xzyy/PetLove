@@ -8,15 +8,14 @@ import UploadPhotoBtn from "./AddPetFormParts/UploadPhotoBtn";
 import PetsNameField from "./AddPetFormParts/PetsNameField";
 import PetsTypeSelector from "./AddPetFormParts/PetsTypeSelector";
 import ActionsBtns from "./AddPetFormParts/ActionsBtns";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import PhotoPreview from "./AddPetFormParts/PhotoPreview";
-import { useAddPetForm } from "../../../features/addPet/useAddPetForm";
-import { validationSchema } from "../../../features/addPet/validationSchema";
-import { defaultValues } from "../../../features/addPet/defaultValues";
-import { useDispatch, useSelector } from "react-redux";
-import { getPetsSpeciesThunk } from "../../../redux/notices/operations";
-import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { selectPetsSpecies } from "../../../redux/notices/selectors";
+import { useGetPetsSpecies } from "../../../features/addPet/getPetsSpecies/useGetPetsSpecies";
+import { useAddPetForm } from "../../../features/addPet/addPetForm/useAddPetForm";
+import { validationSchema } from "../../../features/addPet/addPetForm/validationSchema";
+import { defaultValues } from "../../../features/addPet/addPetForm/defaultValues";
 
 const AddPetForm = () => {
   const methods = useForm({
@@ -29,18 +28,8 @@ const AddPetForm = () => {
   const { reset } = methods;
   const { onSubmit } = useAddPetForm(reset);
   const fileInputRef = useRef(null);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(getPetsSpeciesThunk()).unwrap();
-      } catch (error) {
-        toast.error("Something went wrong with uploading categories", error);
-      }
-    };
-    fetchData();
-  }, [dispatch]);
+  useGetPetsSpecies();
 
   return (
     <div className="rounded-[30px] bg-light-white px-[20px] pb-[20px] pt-[28px] md:rounded-[60px] md:px-[136px] md:py-[40px] lg:px-[80px] lg:py-[60px]">
@@ -62,7 +51,7 @@ const AddPetForm = () => {
 
             {/* Photo Preview */}
             <div
-              className="relative m-auto mb-[6px] flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full bg-bg-cream md:-mb-[6px] md:h-[86px] md:w-[86px]"
+              className="linear relative m-auto mb-[6px] flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full bg-bg-cream transition duration-[250ms] hover:animate-spin-slow hover:bg-dark-orange md:-mb-[6px] md:h-[86px] md:w-[86px]"
               onClick={() => fileInputRef.current?.click()}
             >
               <PhotoPreview

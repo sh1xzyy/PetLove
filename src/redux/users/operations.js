@@ -8,7 +8,7 @@ export const addPetThunk = createAsyncThunk(
       const data = await addPet(body);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue("Something went wrong with adding a pet");
     }
   },
 );

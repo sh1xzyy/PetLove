@@ -64,5 +64,8 @@
 <symbol id="icon-cross-small" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.5556" d="M25.333 6.667l-18.667 18.667M6.667 6.667l18.667 18.667"></path>
 </symbol>
+<symbol id="icon-empty-star" viewBox="0 0 32 32">
+<path fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.56" d="M19.84 10.021c0.34 0.643 0.958 1.093 1.675 1.217l8.106 1.4-5.733 5.904c-0.507 0.522-0.743 1.249-0.64 1.969l1.171 8.144-7.383-3.629-0.25-0.106c-0.508-0.18-1.063-0.18-1.571 0l-0.25 0.106-7.385 3.629 1.173-8.144c0.104-0.72-0.133-1.447-0.64-1.969l-5.735-5.904 8.108-1.4c0.717-0.124 1.335-0.573 1.675-1.217l3.84-7.277 3.84 7.277z"></path>
+</symbol>
 </defs>
 </svg>
