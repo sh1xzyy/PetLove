@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer } from "./auth/slice";
+import { usersReducer } from "./users/slice";
 import { noticesReducer } from "./notices/slice";
 import newsReducer from "./news/slices";
 import { friendsReducer } from "./friends/slices";
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
+    users: usersReducer,
     notices: noticesReducer,
     news: newsReducer,
     friends: friendsReducer,

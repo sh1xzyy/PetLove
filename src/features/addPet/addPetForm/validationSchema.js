@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { BIRTHDAY_PATTERN, IMG_URL_PATTERN } from "../../constants/addPet";
+import { BIRTHDAY_PATTERN, IMG_URL_PATTERN } from "../../../constants/addPet";
 
 export const validationSchema = Yup.object({
   title: Yup.string()

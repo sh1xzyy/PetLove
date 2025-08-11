@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { getInputStylesByValue } from "../../../../utils/addPet/getInputStylesByValue";
 import { getSvgStylesByValue } from "../../../../utils/addPet/getSvgStylesByValue";
 import {
@@ -22,10 +23,9 @@ const SexRadioButtons = () => {
         return (
           <label
             key={option}
-            className={getInputStylesByValue(
-              currentValue,
-              option,
-              radioBtnClass,
+            className={clsx(
+              "group",
+              getInputStylesByValue(currentValue, option, radioBtnClass),
             )}
           >
             <input
@@ -35,10 +35,8 @@ const SexRadioButtons = () => {
               {...register("sex")}
             />
             <svg
-              className={getSvgStylesByValue(
-                currentValue,
-                option,
-                radioBtnSvgClass,
+              className={clsx(
+                getSvgStylesByValue(currentValue, option, radioBtnSvgClass),
               )}
             >
               <use href={`/icons/sprite.svg#icon-${option}`}></use>

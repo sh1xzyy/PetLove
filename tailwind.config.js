@@ -5,6 +5,8 @@ export default {
     extend: {
       colors: {
         "accent-orange": "var(--accent-orange)",
+        "star-orange": "var(--star-orange)",
+        "dark-orange": "var(--dark-orange)",
         "bg-cream": "var(--bg-cream)",
         "light-white": "var(--light-white)",
         "error-red": "var(--error-red)",
@@ -15,6 +17,7 @@ export default {
         "bg-male": "var(--bg-male)",
         "bg-male-selected": "var(--bg-male-selected)",
         "gray-900": "var(--gray-900)",
+        "grey-800": "var(--grey-800)",
         "light-grey": "var(--light-grey)",
         "grey-20": "var(--grey-20)",
         "grey-30": "var(--grey-30)",
@@ -23,6 +26,15 @@ export default {
         "grey-06:": "var(--grey-06)",
         "grey-05": "var(--grey-05)",
         "grey-005": "var(--grey-005)",
+      },
+      keyframes: {
+        appearance: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
       },
     },
     screens: {

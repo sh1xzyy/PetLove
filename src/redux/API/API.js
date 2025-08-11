@@ -23,6 +23,45 @@ export const addPet = async (body) => {
 };
 
 // Notices/*
+
+// Notices Search
+export const getPetsNotices = async ({
+  keyword = "",
+  category = "",
+  species = "",
+  locationId = "",
+  byDate = false,
+  byPrice = false,
+  byPopularity = false,
+  page = 1,
+  limit = 6,
+  sex = "",
+}) => {
+  try {
+    const response = await axios.get(`${API_KEY}/notices`, {
+      params: {
+        keyword,
+        category,
+        species,
+        locationId,
+        byDate,
+        byPrice,
+        byPopularity,
+        page,
+        limit,
+        sex,
+      },
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// Notices Pets Categories
 export const getPetsCategories = async () => {
   try {
     const response = await axios.get(`${API_KEY}/notices/categories`, {
@@ -59,6 +98,21 @@ export const getPetsSpecies = async () => {
       },
     });
     console.log("ResponseData:3", response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// Notices Pets Species
+export const getPetsAdditionalInfo = async (id) => {
+  try {
+    const response = await axios.get(`${API_KEY}/notices/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("ResponseData:4", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);
