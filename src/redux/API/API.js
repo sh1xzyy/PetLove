@@ -105,6 +105,21 @@ export const getPetsSpecies = async () => {
   }
 };
 
+// Notices Pets Species
+export const getPetsAdditionalInfo = async (id) => {
+  try {
+    const response = await axios.get(`${API_KEY}/notices/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("ResponseData:4", response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 // Fetch News
 export const fetchNews = async ({ keyword = "", page = 1, limit = 6 }) => {
   try {

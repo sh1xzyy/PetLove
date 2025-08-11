@@ -11,9 +11,10 @@
   --bg-female-selected: #f43f5e;
   --bg-male: rgba(84, 173, 255, 0.1);
   --bg-male-selected: #54adff;
+  --light-grey: #f2f4f7;
   --gray-900: #262626;
   --grey-800: #2b2b2a;
-  --light-grey: #f2f4f7;
+  --grey-20: rgba(38, 38, 38, 0.2);
   --grey-30: rgba(38, 38, 38, 0.3);
   --grey-40: rgba(43, 43, 42, 0.4);
   --grey-15: rgba(38, 38, 38, 0.15);
