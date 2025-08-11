@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
+  getPetsAdditionalInfoThunk,
   getPetsCategoriesThunk,
   getPetsNoticesThunk,
   getPetsSexThunk,
@@ -12,6 +13,7 @@ const initialState = {
   categories: [],
   sex: [],
   species: [],
+  petsAdditionalInfo: {},
 };
 
 const slice = createSlice({
@@ -35,12 +37,19 @@ const slice = createSlice({
         state.isLoading = false;
         state.species = action.payload;
       })
+      .addCase(getPetsAdditionalInfoThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log(action.payload);
+
+        state.petsAdditionalInfo = action.payload;
+      })
       .addMatcher(
         isAnyOf(
           getPetsCategoriesThunk.rejected,
           getPetsSexThunk.rejected,
           getPetsSpeciesThunk.rejected,
           getPetsNoticesThunk.rejected,
+          getPetsAdditionalInfoThunk.rejected,
         ),
         (state) => {
           state.isLoading = false;
@@ -52,6 +61,7 @@ const slice = createSlice({
           getPetsSexThunk.pending,
           getPetsSpeciesThunk.pending,
           getPetsNoticesThunk.pending,
+          getPetsAdditionalInfoThunk.pending,
         ),
         (state) => {
           state.isLoading = true;

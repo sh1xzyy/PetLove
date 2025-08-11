@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  getPetsAdditionalInfo,
   getPetsCategories,
   getPetsNotices,
   getPetsSex,
@@ -52,6 +53,20 @@ export const getPetsSpeciesThunk = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         "Something went wrong with uploading Pets Species",
+      );
+    }
+  },
+);
+
+export const getPetsAdditionalInfoThunk = createAsyncThunk(
+  "/notices/{id}",
+  async (id, { rejectWithValue }) => {
+    try {
+      const data = await getPetsAdditionalInfo(id);
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        "Something went wrong with getting additional info about pet",
       );
     }
   },

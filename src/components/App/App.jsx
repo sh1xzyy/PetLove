@@ -5,6 +5,7 @@ import PrivateRouters from "../closedRoutes/PrivateRouters";
 import RestrictedRoutes from "../closedRoutes/RestrictedRoutes";
 import { useModalAttentionContext } from "../../contexts/ModalAttentionContext/useModalAttentionContext.jsx";
 import ModalAttention from "../common/ModalAttention/ModalAttention.jsx";
+import ModalNotice from "../notices/ModalNotice/ModalNotice.jsx";
 const MainPage = lazy(() => import("../../pages/MainPage/MainPage"));
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const NewsPage = lazy(() => import("../../pages/NewsPage/NewsPage"));
@@ -40,14 +41,9 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route
-            path="/notices"
-            element={
-              <PrivateRouters redirectTo="/login">
-                <NoticesPage />
-              </PrivateRouters>
-            }
-          />
+          <Route path="/notices" element={<NoticesPage />}>
+            <Route path=":id" element={<ModalNotice />} />
+          </Route>
           <Route path="/friends" element={<FriendsPage />} />
           <Route
             path="/profile"

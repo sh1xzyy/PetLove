@@ -5,6 +5,8 @@ export const selectPetsNoticesList = (state) => state.notices.petsList;
 const selectPetsCategories = (state) => state.notices.categories;
 const selectPetsSex = (state) => state.notices.sex;
 export const selectPetsSpecies = (state) => state.notices.species;
+export const selectPetsAdditionalInfo = (state) =>
+  state.notices.petsAdditionalInfo;
 
 export const selectOptionsSelector = createSelector(
   [selectPetsCategories, selectPetsSex, selectPetsSpecies],
