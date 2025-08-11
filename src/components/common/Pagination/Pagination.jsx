@@ -1,7 +1,22 @@
+import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
+import { RiArrowLeftSLine } from "react-icons/ri";
+import clsx from "clsx";
+import { useState, useEffect } from "react";
+
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const [maxPagesToShow, setMaxPagesToShow] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMaxPagesToShow(window.innerWidth < 768 ? 2 : 3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const getPageNumbers = () => {
     const pageNumbers = [];
-    const maxPagesToShow = 3;
     const halfMax = Math.floor(maxPagesToShow / 2);
 
     if (totalPages <= maxPagesToShow + 1) {
@@ -28,7 +43,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
       if (endPage < totalPages) {
         if (endPage < totalPages - 1) pageNumbers.push("...");
-        pageNumbers.push(totalPages);
       }
     }
 
@@ -41,53 +55,88 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     }
   };
 
+  const baseButtonClasses = clsx(
+    "flex items-center justify-center rounded-[50%] bg-transparent text-sm transition hover:bg-gray-200 disabled:opacity-50 appearance-none",
+    "h-[34px] w-[34px] border border-[--grey-20]",
+    "md:h-[44px] md:w-[44px]",
+  );
+
+  const iconClasses = (isDisabled) =>
+    clsx(isDisabled ? "text-gray-400" : "text-gray-900");
+
   return (
     <div className="mt-8 flex items-center justify-center gap-2">
+      {/* First */}
       <button
         onClick={() => handlePageChange(1)}
         disabled={currentPage === 1}
-        className="rounded bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300 disabled:opacity-50"
+        className={baseButtonClasses}
       >
-        First
+        <MdOutlineKeyboardDoubleArrowLeft
+          className={iconClasses(currentPage === 1)}
+          size={22}
+        />
       </button>
 
+      {/* Prev */}
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="rounded bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300 disabled:opacity-50"
+        className={baseButtonClasses}
       >
-        Prev
+        <RiArrowLeftSLine
+          className={iconClasses(currentPage === 1)}
+          size={22}
+        />
       </button>
 
+      {/* Numbers */}
       {getPageNumbers().map((pageNum, index) => (
         <button
           key={index}
           onClick={() => handlePageChange(pageNum)}
-          className={`rounded px-3 py-1 text-sm ${
+          className={clsx(
+            "flex h-[34px] w-[34px] appearance-none items-center justify-center rounded-[100%] px-2 py-1 text-[16px] font-bold",
+            "md:h-[44px] md:w-[44px] md:px-3 md:text-[18px]",
             pageNum === currentPage
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          } ${typeof pageNum !== "number" ? "cursor-default" : ""}`}
+              ? "bg-[#f6b83d] text-white"
+              : "border border-[--grey-005] bg-transparent text-[--gray-900] hover:bg-gray-200",
+            typeof pageNum !== "number" ? "cursor-default" : "",
+          )}
           disabled={typeof pageNum !== "number"}
         >
           {pageNum}
         </button>
       ))}
 
+      {/* Next */}
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="rounded bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300 disabled:opacity-50"
+        className={baseButtonClasses}
       >
-        Next
+        <RiArrowLeftSLine
+          className={clsx(
+            iconClasses(currentPage === totalPages),
+            "rotate-180",
+          )}
+          size={22}
+        />
       </button>
 
+      {/* Last */}
       <button
         onClick={() => handlePageChange(totalPages)}
         disabled={currentPage === totalPages}
-        className="rounded bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300 disabled:opacity-50"
+        className={baseButtonClasses}
       >
-        Last
+        <MdOutlineKeyboardDoubleArrowLeft
+          className={clsx(
+            iconClasses(currentPage === totalPages),
+            "rotate-180",
+          )}
+          size={22}
+        />
       </button>
     </div>
   );

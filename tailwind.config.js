@@ -16,6 +16,7 @@ export default {
         "bg-male-selected": "var(--bg-male-selected)",
         "gray-900": "var(--gray-900)",
         "light-grey": "var(--light-grey)",
+        "grey-20": "var(--grey-20)",
         "grey-30": "var(--grey-30)",
         "grey-40": "var(--grey-40)",
         "grey-15": "var(--grey-15)",
