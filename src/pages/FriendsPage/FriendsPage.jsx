@@ -24,11 +24,11 @@ const FriendsPage = () => {
 
   return (
     <section>
-      <Container type="common">
+      <Container type="list">
         <div className="bg-[--neutral-bg] pb-[80px] pt-[54px] md:pt-[85px] lg:pt-[96px]">
           <Title
             text="Our friends"
-            marginBottom="mb-[40px] md:mb-[44px] lg:mb-[60px]"
+            styles="mb-[40px] md:mb-[44px] lg:mb-[60px]"
           />
           {isLoading && <Loader />}
           {error && <p>Error: {error}</p>}

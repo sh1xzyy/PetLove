@@ -1,5 +1,13 @@
-const HomePage = () => {
-	return <div>HomePage</div>
-}
+import Container from "../../components/common/Container/Container";
 
-export default HomePage
+const HomePage = () => {
+  return (
+    <section>
+      <Container>
+        <h1 className="text-[200px]">HOME</h1>
+      </Container>
+    </section>
+  );
+};
+
+export default HomePage;
