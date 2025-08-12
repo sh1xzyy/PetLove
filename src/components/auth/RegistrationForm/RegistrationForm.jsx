@@ -7,8 +7,11 @@ import toast from "react-hot-toast";
 import { usePasswordToggle } from "../../../hooks/usePasswordToggle";
 import ToggleIcon from "../ToggleIcon/ToggleIcon";
 import { validationRegisterSchema } from "../../../features/auth/validationSchema";
+import { useDispatch } from "react-redux";
+import { registerUserThunk } from "../../../redux/users/operations";
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = usePasswordToggle(["pass1", "pass2"]);
 
   const {
@@ -21,10 +24,15 @@ const RegistrationForm = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    toast.success("You registered successfully!");
-    reset();
+  const onSubmit = async ({ name, email, password }) => {
+    try {
+      await dispatch(registerUserThunk({ name, email, password })).unwrap();
+      toast.success("Registration successful!");
+      reset();
+    } catch (error) {
+      console.log(error);
+      toast.error("Registration failed! Try again");
+    }
   };
 
   return (

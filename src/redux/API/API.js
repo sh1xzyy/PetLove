@@ -2,6 +2,21 @@ import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+export const authInstance = axios.create({
+  baseURL: "https://petlove.b.goit.study/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export const addToken = (token) => {
+  authInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+};
+
+export const clearToken = () => {
+  authInstance.defaults.headers.common["Authorization"] = "";
+};
+
 // Add Pet
 export const addPet = async (body) => {
   try {
