@@ -39,8 +39,8 @@ const NewsPage = () => {
 
   return (
     <section>
-      <Container type="common">
-        <div className="flex flex-col pb-[80px] pt-[54px] md:pt-[85px] lg:px-[32px] lg:pt-[96px]">
+      <Container type="list">
+        <div className="flex flex-col pb-[80px] pt-[54px] md:pt-[85px] lg:pt-[96px]">
           <div className="mb-[24px] flex flex-col justify-between gap-[20px] md:mb-[44px] md:flex-row md:items-center md:gap-0 lg:mb-[60px]">
             <Title text="News" />
             <SearchNews

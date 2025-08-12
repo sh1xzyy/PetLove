@@ -1,8 +1,9 @@
 import clsx from "clsx";
-import React, { useState } from "react";
-import SchedulePopup from "./SchedulePopup/SchedulePopup"; // Убедитесь, что путь правильный
+import { useState } from "react";
+import SchedulePopup from "./SchedulePopup/SchedulePopup";
 
 const FriendsItem = ({ friend }) => {
+  const [showSchedule, setShowSchedule] = useState(false);
   const {
     title,
     url,
@@ -18,7 +19,9 @@ const FriendsItem = ({ friend }) => {
 
   if (!friend) return null;
 
-  const [showSchedule, setShowSchedule] = useState(false);
+  const isRealEmail = email && email !== "website only";
+  const isRealAddress = address && address !== "website only";
+  const isRealPhone = phone && phone !== "email only";
 
   return (
     <div
@@ -32,7 +35,7 @@ const FriendsItem = ({ friend }) => {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full max-w-[80px] md:max-w-[90px]"
+        className="w-full max-w-[80px] transition hover:scale-[1.15] md:max-w-[90px]"
       >
         <img
           src={imageUrl}
@@ -57,6 +60,8 @@ const FriendsItem = ({ friend }) => {
           target="_blank"
           className={clsx(
             "mb-2 line-clamp-2 block text-[14px] font-medium leading-[129%] tracking-[-0.02em] text-[--gray-900]",
+            isRealEmail &&
+              "transition-transform duration-300 hover:translate-x-1",
           )}
         >
           <span className="text-[--grey-05]">Email: </span>
@@ -68,6 +73,8 @@ const FriendsItem = ({ friend }) => {
           rel="noopener noreferrer"
           className={clsx(
             "mb-2 line-clamp-2 block text-[14px] font-medium leading-[129%] tracking-[-0.02em] text-[--gray-900]",
+            isRealAddress &&
+              "transition-transform duration-300 hover:translate-x-1",
           )}
         >
           <span className="text-[--grey-05]">Address: </span>
@@ -77,6 +84,8 @@ const FriendsItem = ({ friend }) => {
           href={`tel:${phone}`}
           className={clsx(
             "line-clamp-2 block text-[14px] font-medium leading-[129%] tracking-[-0.02em] text-[--gray-900]",
+            isRealPhone &&
+              "transition-transform duration-200 hover:translate-x-1",
           )}
         >
           <span className="text-[--grey-05]">Phone: </span>
