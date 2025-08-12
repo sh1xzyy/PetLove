@@ -1,17 +1,15 @@
 import BaseModal from "../../common/BaseModal/BaseModal";
 import { useSelector } from "react-redux";
 import { selectPetsAdditionalInfo } from "../../../redux/notices/selectors";
-import { Rating } from "react-simple-star-rating";
-import { MdOutlineStar } from "react-icons/md";
 import { useLocation, useParams } from "react-router";
 import { useCloseModal } from "../../../hooks/useCloseModal";
 import { useGetPetsAdditionalInfo } from "../../../features/modalNotice/useGetPetsAdditionalInfo";
 import ActionBtns from "./ModalNoticeParts/ActionBtns";
 import PetsRating from "./ModalNoticeParts/PetsRating";
-import PetsOptionsList from "./ModalNoticeParts/PetsOptionsList";
-import PetsComment from "./ModalNoticeParts/PetsComment";
-import PetsPrice from "./ModalNoticeParts/PetsPrice";
 import PetsImg from "./ModalNoticeParts/PetsImg";
+import PetsComment from "../noticesCommonParts/PetsComment";
+import PetsPrice from "../noticesCommonParts/PetsPrice";
+import PetsOptionList from "../noticesCommonParts/PetsOptionList";
 
 const ModalNotice = () => {
   const petsAdditionalInfo = useSelector(selectPetsAdditionalInfo);
@@ -41,7 +39,7 @@ const ModalNotice = () => {
           </div>
         </div>
         <div className="mb-[16px]">
-          <PetsOptionsList
+          <PetsOptionList
             data={{
               name: "coco",
               birthday: "2019-08-12",

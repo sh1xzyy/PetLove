@@ -1,10 +1,13 @@
-import { datePrettier } from "../../../../utils/notices/datePrettier";
-import { namePrettier } from "../../../../utils/notices/namePrettier";
-import { optionsPrettier } from "../../../../utils/notices/optionsPrettier";
+import { datePrettier } from "../../../utils/notices/datePrettier";
+import { namePrettier } from "../../../utils/notices/namePrettier";
+import { optionsPrettier } from "../../../utils/notices/optionsPrettier";
 
-const PetsOptionsList = ({ data: { name, birthday, sex, species } }) => {
+const PetsOptionList = ({
+  data: { name, birthday, sex, category = "", species },
+  type = "",
+}) => {
   return (
-    <ul className="flex gap-x-[27px]">
+    <ul className="flex gap-x-[14px] md:gap-x-[16px] lg:gap-x-[20px]">
       <li>
         <h4 className="-mb-[2px] text-[10px] font-medium leading-[1.4] tracking-[-0.02em] text-grey-05">
           Name
@@ -49,8 +52,21 @@ const PetsOptionsList = ({ data: { name, birthday, sex, species } }) => {
           {optionsPrettier(species)}
         </span>
       </li>
+      {type === "noticesItem" && (
+        <li>
+          <h4 className="-mb-[2px] text-[10px] font-medium leading-[1.4] tracking-[-0.02em] text-grey-05">
+            Category
+          </h4>
+          <span
+            className="text-[12px] font-medium leading-[1.17] tracking-[-0.02em] text-gray-900"
+            title={optionsPrettier(category)}
+          >
+            {optionsPrettier(category)}
+          </span>
+        </li>
+      )}
     </ul>
   );
 };
 
-export default PetsOptionsList;
+export default PetsOptionList;

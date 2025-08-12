@@ -18,7 +18,7 @@ export const addPet = async (body) => {
     console.log("ResponseData:", response.data);
     return response.data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to add pet");
+    throw new Error(error);
   }
 };
 
@@ -114,6 +114,42 @@ export const getPetsAdditionalInfo = async (id) => {
       },
     });
     console.log("ResponseData:4", response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// Notices Add Pet to Favorite
+export const addPetToFavorite = async (id) => {
+  try {
+    const response = await axios.post(
+      `${API_KEY}/notices/favorites/add/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    console.log("ResponseData:5", response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// Notices Add Pet to Favorite
+export const removePetFromFavorite = async (id) => {
+  try {
+    const response = await axios.delete(
+      `${API_KEY}/notices/favorites/remove/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    console.log("ResponseData:6", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);

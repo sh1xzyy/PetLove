@@ -1,10 +1,12 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
+  addPetToFavoriteThunk,
   getPetsAdditionalInfoThunk,
   getPetsCategoriesThunk,
   getPetsNoticesThunk,
   getPetsSexThunk,
   getPetsSpeciesThunk,
+  removePetFromFavoritesThunk,
 } from "./operations";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   sex: [],
   species: [],
   petsAdditionalInfo: {},
+  favoritePetsList: [],
 };
 
 const slice = createSlice({
@@ -39,9 +42,15 @@ const slice = createSlice({
       })
       .addCase(getPetsAdditionalInfoThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
-
         state.petsAdditionalInfo = action.payload;
+      })
+      .addCase(addPetToFavoriteThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.favoritePetsList = action.payload;
+      })
+      .addCase(removePetFromFavoritesThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.favoritePetsList = action.payload;
       })
       .addMatcher(
         isAnyOf(
@@ -50,6 +59,8 @@ const slice = createSlice({
           getPetsSpeciesThunk.rejected,
           getPetsNoticesThunk.rejected,
           getPetsAdditionalInfoThunk.rejected,
+          addPetToFavoriteThunk.rejected,
+          removePetFromFavoritesThunk.rejected,
         ),
         (state) => {
           state.isLoading = false;
@@ -62,6 +73,8 @@ const slice = createSlice({
           getPetsSpeciesThunk.pending,
           getPetsNoticesThunk.pending,
           getPetsAdditionalInfoThunk.pending,
+          addPetToFavoriteThunk.pending,
+          removePetFromFavoritesThunk.pending,
         ),
         (state) => {
           state.isLoading = true;

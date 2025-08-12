@@ -1,10 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  addPetToFavorite,
   getPetsAdditionalInfo,
   getPetsCategories,
   getPetsNotices,
   getPetsSex,
   getPetsSpecies,
+  removePetFromFavorite,
 } from "../API/API";
 
 export const getPetsNoticesThunk = createAsyncThunk(
@@ -67,6 +69,34 @@ export const getPetsAdditionalInfoThunk = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         "Something went wrong with getting additional info about pet",
+      );
+    }
+  },
+);
+
+export const addPetToFavoriteThunk = createAsyncThunk(
+  "/notices/favorites/add/{id}",
+  async (id, { rejectWithValue }) => {
+    try {
+      const data = await addPetToFavorite(id);
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        "Something went wrong with adding pet to favorite",
+      );
+    }
+  },
+);
+
+export const removePetFromFavoritesThunk = createAsyncThunk(
+  "notices/favorites/remove/{id}",
+  async (id, { rejectWithValue }) => {
+    try {
+      const data = await removePetFromFavorite(id);
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        "Something went wrong with removing pet from favorites",
       );
     }
   },
