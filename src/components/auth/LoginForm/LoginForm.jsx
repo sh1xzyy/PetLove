@@ -6,8 +6,11 @@ import ToggleIcon from "../ToggleIcon/ToggleIcon";
 import { Link } from "react-router-dom";
 import { usePasswordToggle } from "../../../hooks/usePasswordToggle";
 import { validationLoginSchema } from "../../../features/auth/validationSchema";
+import { useDispatch } from "react-redux";
+import { loginUserThunk } from "../../../redux/users/operations";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = usePasswordToggle(["pass1"]);
 
   const {
@@ -20,10 +23,15 @@ const LoginForm = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    toast.success("You login successfully!");
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(loginUserThunk(data)).unwrap();
+      reset();
+      toast.success("Login successful!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Login failed! Try again");
+    }
   };
 
   return (
