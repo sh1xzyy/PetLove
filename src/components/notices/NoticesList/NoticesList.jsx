@@ -1,24 +1,13 @@
-import { useEffect } from "react";
 import NoticesItem from "../NoticesItem/NoticesItem";
-import { useDispatch, useSelector } from "react-redux";
-import { getPetsNoticesThunk } from "../../../redux/notices/operations";
-import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { selectPetsNoticesList } from "../../../redux/notices/selectors";
+import { useFetchNotices } from "../../../features/notices/getPetsByFilter/useFetchNotices";
+import { defaultValues } from "../../../features/notices/getPetsByFilter/defaultValues";
 
 const NoticesList = () => {
   const petsList = useSelector(selectPetsNoticesList);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(getPetsNoticesThunk({})).unwrap();
-      } catch (error) {
-        toast.error(error);
-      }
-    };
-    fetchData();
-  }, [dispatch]);
+  useFetchNotices(defaultValues);
 
   return (
     <>
