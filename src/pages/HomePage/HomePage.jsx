@@ -3,9 +3,9 @@ import Container from "../../components/common/Container/Container";
 
 const HomePage = () => {
   return (
-    <section>
+    <section className="mb-[10px] md:mb-[16px]">
       <Container type="common">
-        <div className="mb-[10px] flex flex-col md:mb-[16px]">
+        <div className="flex flex-col">
           <div
             className={clsx(
               "flex flex-col items-end justify-center rounded-b-[30px] bg-[--accent-orange] px-[20px] pb-[50px] pt-[60px]",
@@ -38,26 +38,26 @@ const HomePage = () => {
             <source
               media="(min-width: 1280px)"
               srcSet="
-                /public/common/desktop/home-dog-desktop@1x.png 1x,
-                /public/common/desktop/home-dog-desktop@2x.png 2x"
+                /common/desktop/home-dog-desktop@1x.png 1x,
+                /common/desktop/home-dog-desktop@2x.png 2x"
               type="image/png"
             />
             <source
               media="(min-width: 768px) and (max-width: 1279px)"
               srcSet="
-                /public/common/laptop/home-dog-laptop@1x.png 1x,
-                /public/common/laptop/home-dog-laptop@2x.png 2x"
+                /common/laptop/home-dog-laptop@1x.png 1x,
+                /common/laptop/home-dog-laptop@2x.png 2x"
               type="image/png"
             />
             <source
               media="(max-width: 767px)"
               srcSet="
-                /public/common/phone/home-dog-phone@1x.png 1x,
-                /public/common/phone/home-dog-phone@2x.png 2x"
+                /common/phone/home-dog-phone@1x.png 1x,
+                /common/phone/home-dog-phone@2x.png 2x"
               type="image/png"
             />
             <img
-              src="/public/common/phone/home-dog-phone@1x.png"
+              src="/common/phone/home-dog-phone@1x.png"
               alt="Small pets care"
               className="h-auto w-full object-cover"
             />
