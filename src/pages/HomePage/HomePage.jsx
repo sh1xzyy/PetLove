@@ -27,7 +27,7 @@ const HomePage = () => {
               your life with immeasurable joy and tenderness.
             </p>
           </div>
-          <img src="" alt="" />
+          {/* <img src="" alt="" /> */}
         </div>
       </Container>
     </section>
