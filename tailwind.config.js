@@ -26,6 +26,7 @@ export default {
         "grey-06:": "var(--grey-06)",
         "grey-05": "var(--grey-05)",
         "grey-005": "var(--grey-005)",
+        "superlight-white": "var(--superlight-white)",
       },
       keyframes: {
         appearance: {
