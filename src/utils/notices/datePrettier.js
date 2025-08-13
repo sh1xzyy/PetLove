@@ -1,4 +1,8 @@
 export const datePrettier = (date) => {
-  const [year, month, day] = date.split("-");
-  return `${day}.${month}.${year}`;
+  if (date) {
+    const [year, month, day] = date.split("-");
+    return `${day}.${month}.${year}`;
+  }
+
+  return "No date";
 };

@@ -4,10 +4,27 @@ import { customStyles } from "./customStyles";
 import { useFormContext, Controller } from "react-hook-form";
 import { correctOptionsFormat } from "../../../../utils/common/correctOptionsFormat";
 
-const CustomSelector = ({ name, placeholder, options, additionalStyles }) => {
+const CustomSelector = ({
+  name,
+  placeholder,
+  options,
+  type,
+  additionalStyles,
+}) => {
   const { control } = useFormContext();
 
   const { optionsPrettier } = correctOptionsFormat(options);
+
+  const optionsWithShowAll = [
+    {
+      value: "",
+      label: "Show all",
+    },
+    ...optionsPrettier,
+  ];
+
+  const correctOptions =
+    type === "findPet" ? optionsWithShowAll : optionsPrettier;
 
   return (
     <Controller
@@ -16,13 +33,13 @@ const CustomSelector = ({ name, placeholder, options, additionalStyles }) => {
       render={({ field }) => (
         <Select
           {...field}
-          options={optionsPrettier}
+          options={correctOptions}
           styles={{ ...customStyles, ...additionalStyles }}
           components={{ DropdownIndicator }}
           placeholder={placeholder}
           value={
             field.value
-              ? optionsPrettier.find((option) => option.value === field.value)
+              ? correctOptions.find((option) => option.value === field.value)
               : null
           }
           onChange={(selectedOption) => field.onChange(selectedOption.value)}

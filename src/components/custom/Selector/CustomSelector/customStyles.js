@@ -28,27 +28,31 @@ export const customStyles = {
       fontSize: "16px",
     },
   }),
-  option: (provided, state) => ({
-    ...provided,
-    display: "flex",
-    alignItems: "center",
-    height: "26px",
-    padding: "0 12px",
-    borderRadius: "15px",
-    cursor: "pointer",
-    fontWeight: 500,
-    fontSize: "14px",
-    lineHeight: "1.28",
-    letterSpacing: "-0.03em",
-    color: state.isSelected ? "var(--gray-900)" : "var(--grey-06)",
-    backgroundColor: "var(--light-white)",
-    "&:hover": {
-      backgroundColor: "var(--light-grey)",
-    },
-    "@media screen and (min-width: 768px)": {
-      fontSize: "16px",
-    },
-  }),
+  option: (provided, state) => {
+    const isFirst = state.data === state.selectProps.options[0];
+    return {
+      ...provided,
+      display: "flex",
+      alignItems: "center",
+      height: "26px",
+      padding: "0 12px",
+      borderRadius: "15px",
+      cursor: "pointer",
+      fontWeight: 500,
+      fontSize: "14px",
+      lineHeight: "1.28",
+      letterSpacing: "-0.03em",
+      color: state.isSelected ? "var(--gray-900)" : "var(--grey-06)",
+      backgroundColor: "var(--light-white)",
+      ...(isFirst && { color: "var(--accent-orange)" }),
+      "&:hover": {
+        backgroundColor: "var(--light-grey)",
+      },
+      "@media screen and (min-width: 768px)": {
+        fontSize: "16px",
+      },
+    };
+  },
   menuList: (provided) => ({
     ...provided,
     maxHeight: "78px",
