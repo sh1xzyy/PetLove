@@ -9,7 +9,7 @@ const HomePage = () => {
           <div
             className={clsx(
               "flex flex-col items-end justify-center rounded-b-[30px] bg-[--accent-orange] px-[20px] pb-[50px] pt-[60px]",
-              "md:px-[32px] md:pb-[44px] md:pt-[112px]",
+              "md:rounded-b-[60px] md:px-[32px] md:pb-[44px] md:pt-[112px]",
               "lg:flex-row lg:justify-between lg:px-[64px] lg:pb-[32px]",
             )}
           >
@@ -34,7 +34,7 @@ const HomePage = () => {
               your life with immeasurable joy and tenderness.
             </p>
           </div>
-          <picture className="w-full max-w-full overflow-hidden rounded-[30px] bg-amber-500">
+          <picture className="w-full max-w-full overflow-hidden rounded-[30px] bg-[--neutral-bg] md:rounded-[60px]">
             <source
               media="(min-width: 1280px)"
               srcSet="
