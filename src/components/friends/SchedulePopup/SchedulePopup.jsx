@@ -1,3 +1,4 @@
+import CalendarDog from "/common/other/CalendarDog.webp";
 const SchedulePopup = ({ workDays }) => {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -15,7 +16,7 @@ const SchedulePopup = ({ workDays }) => {
   };
 
   return (
-    <div className="absolute right-0 top-full z-10 mt-2 w-[160px] rounded-lg bg-white px-4 pb-3 pt-[60px] shadow-lg">
+    <div className="absolute right-0 top-full z-10 mt-2 w-[160px] rounded-lg bg-white px-4 pb-3 pt-[70px] shadow-lg">
       <ul className="relative text-[14px] text-[--gray-900]">
         {formatSchedule().map((schedule, index) => (
           <li key={index} className="py-1">
@@ -23,9 +24,9 @@ const SchedulePopup = ({ workDays }) => {
           </li>
         ))}
         <img
-          src="/public/common/CalendarDog.webp"
+          src={CalendarDog}
           alt="Mult dog with calendar"
-          className="absolute right-[50px] top-[-70px]"
+          className="absolute right-[35px] top-[-65px]"
           width="65"
           height="70"
         />
