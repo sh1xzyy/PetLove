@@ -22,7 +22,7 @@ const UserNav = () => {
           Log out
         </button>
       </li>
-      <li>{user?.name}</li>
+      <li>Welcome {user?.name}</li>
     </ul>
   );
 };
