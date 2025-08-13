@@ -1,11 +1,12 @@
 import CustomSelector from "../../../custom/Selector/CustomSelector/CustomSelector";
 
-const Selector = ({ options }) => {
+const Selector = ({ name, placeholder, options, type }) => {
   return (
     <CustomSelector
-      name="category"
-      placeholder="Category"
+      name={name}
+      placeholder={placeholder}
       options={options}
+      type={type}
       additionalStyles={{
         control: (provided) => ({
           ...provided,

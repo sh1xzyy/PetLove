@@ -7,20 +7,22 @@ import NoticesList from "../../components/notices/NoticesList/NoticesList";
 const NoticesPage = () => {
   return (
     <>
-      <section className="pb-[20px] pt-[54px] md:pb-[16px] md:pt-[85px] lg:pb-[20px] lg:pt-[96px]">
-        <Container type="common">
-          <Title
-            text="Find your favorite pet"
-            styles="mb-[40px] md:mb-[44px] lg:mb-[40px]"
-          />
-          <NoticesFilters />
-        </Container>
-      </section>
-      <section className="pt-[20px] md:pb-[88px] md:pt-[16px] lg:pb-[80px] lg:pt-[20px]">
-        <Container type="list">
-          <NoticesList />
-          <Outlet />
-        </Container>
+      <section className="pb-[88px] pt-[60px] md:pt-[96px] lg:pb-[80px] lg:pt-[107px]">
+        <div className="pb-[20px] md:pb-[16px] lg:pb-[20px]">
+          <Container type="common">
+            <Title
+              text="Find your favorite pet"
+              styles="mb-[40px] md:mb-[44px] lg:mb-[40px]"
+            />
+            <NoticesFilters />
+          </Container>
+        </div>
+        <div className="pt-[20px] md:pt-[16px] lg:pt-[20px]">
+          <Container type="list">
+            <NoticesList />
+            <Outlet />
+          </Container>
+        </div>
       </section>
     </>
   );
