@@ -2,12 +2,10 @@ import Container from "../../components/common/Container/Container";
 import PetBlock from "../../components/common/PetBlock/PetBlock";
 import Title from "../../components/common/Title/Title";
 import LoginForm from "../../components/auth/LoginForm/LoginForm";
-import Header from "../../components/Header/Header/Header";
 
 const LoginPage = () => {
   return (
     <Container type="common">
-      <Header />
       <PetBlock children="PetBlock for Login" />
       <div className="rounded-[60px] bg-light-white">
         <Title text="Log in" />
