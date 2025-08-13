@@ -22,7 +22,7 @@ const UserNav = () => {
           Log out
         </button>
       </li>
-      <li>{user?.name ?? "Not logged in"}</li>
+      <li>{user?.name}</li>
     </ul>
   );
 };

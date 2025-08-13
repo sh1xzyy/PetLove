@@ -1,11 +1,13 @@
+import { Link } from "react-router";
+
 const AuthNav = () => {
   return (
     <ul>
       <li>
-        <button>Log in</button>
+        <Link to="/login">Log in</Link>
       </li>
       <li>
-        <button>Registration</button>
+        <Link to="/register">Registration</Link>
       </li>
     </ul>
   );

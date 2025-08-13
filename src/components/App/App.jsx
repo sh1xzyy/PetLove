@@ -85,7 +85,7 @@
 // }
 
 // export default App;
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import Loader from "../common/Loader/Loader";
 import { Route, Routes } from "react-router";
 import PrivateRouters from "../closedRoutes/PrivateRouters";
@@ -93,6 +93,8 @@ import RestrictedRoutes from "../closedRoutes/RestrictedRoutes";
 import { useModalAttentionContext } from "../../contexts/ModalAttentionContext/useModalAttentionContext.jsx";
 import ModalAttention from "../common/ModalAttention/ModalAttention.jsx";
 import ModalNotice from "../notices/ModalNotice/ModalNotice.jsx";
+import { refreshUserThunk } from "../../redux/users/operations.js";
+import { useDispatch } from "react-redux";
 const MainPage = lazy(() => import("../../pages/MainPage/MainPage"));
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const NewsPage = lazy(() => import("../../pages/NewsPage/NewsPage"));
@@ -117,6 +119,12 @@ const NotFoundPage = lazy(
 function App() {
   const { isAttentionModalOpen, setIsAttentionModalOpen } =
     useModalAttentionContext();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUserThunk());
+  }, [dispatch]);
 
   return (
     <>

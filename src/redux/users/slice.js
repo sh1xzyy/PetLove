@@ -3,6 +3,7 @@ import {
   addPetThunk,
   loginUserThunk,
   logoutUserThunk,
+  refreshUserThunk,
   registerUserThunk,
 } from "./operations.js";
 
@@ -34,7 +35,7 @@ const slice = createSlice({
       })
       .addCase(registerUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -47,7 +48,7 @@ const slice = createSlice({
       })
       .addCase(loginUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -63,6 +64,19 @@ const slice = createSlice({
       })
       .addCase(logoutUserThunk.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(refreshUserThunk.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUserThunk.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(refreshUserThunk.rejected, (state) => {
+        state.isRefreshing = false;
+        state.token = null;
+        state.isLoggedIn = false;
       })
       .addMatcher(isAnyOf(addPetThunk.rejected), (state) => {
         state.isLoading = false;
