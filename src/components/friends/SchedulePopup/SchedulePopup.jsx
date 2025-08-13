@@ -1,4 +1,4 @@
-import CalendarDog from "/common/CalendarDog.webp";
+import CalendarDog from "/common/other/CalendarDog.webp";
 const SchedulePopup = ({ workDays }) => {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
