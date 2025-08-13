@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 const MainPage = () => {
   return (
     <section>
-      {/* <Header /> */}
+      {/* {<Header />} */}
       <Outlet />
     </section>
   );
