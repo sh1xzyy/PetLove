@@ -1,6 +1,9 @@
 import BaseModal from "../../common/BaseModal/BaseModal";
 import { useSelector } from "react-redux";
-import { selectPetsAdditionalInfo } from "../../../redux/notices/selectors";
+import {
+  selectIsLoading,
+  selectPetsAdditionalInfo,
+} from "../../../redux/notices/selectors";
 import { useLocation, useParams } from "react-router";
 import { useCloseModal } from "../../../hooks/useCloseModal";
 import { useGetPetsAdditionalInfo } from "../../../features/modalNotice/useGetPetsAdditionalInfo";
@@ -10,18 +13,33 @@ import PetsImg from "./ModalNoticeParts/PetsImg";
 import PetsComment from "../noticesCommonParts/PetsComment";
 import PetsPrice from "../noticesCommonParts/PetsPrice";
 import PetsOptionList from "../noticesCommonParts/PetsOptionList";
+import Loader from "../../common/Loader/Loader";
+import PetsTitle from "../noticesCommonParts/PetsTitle";
 
 const ModalNotice = () => {
   const petsAdditionalInfo = useSelector(selectPetsAdditionalInfo);
+  const {
+    birthday,
+    species,
+    title,
+    imgURL,
+    name,
+    popularity,
+    comment,
+    sex,
+    price,
+  } = petsAdditionalInfo;
   const location = useLocation();
   const backLink = location.state?.backgroundLocation?.pathname ?? "/notices";
-  const closeModal = useCloseModal(backLink);
+  const isLoading = useSelector(selectIsLoading);
   const { id } = useParams();
-  console.log(petsAdditionalInfo);
-
-  let imgURL = "/public/common/phone/home-dog-phone@1x.png";
+  const closeModal = useCloseModal(backLink);
 
   useGetPetsAdditionalInfo(id);
+
+  if (isLoading || Object.keys(petsAdditionalInfo).length === 0) {
+    return <Loader />;
+  }
 
   return (
     <BaseModal
@@ -29,30 +47,28 @@ const ModalNotice = () => {
       closeModal={closeModal}
     >
       <div className="flex flex-col items-center">
-        <PetsImg img={imgURL} />
+        <PetsImg imgURL={imgURL} />
         <div className="mb-[24px] md:mb-[20px]">
-          <h4 className="text-[16px] font-bold leading-[1.25] text-grey-800 md:mb-[10px]">
-            Golden Retriever Puppies
-          </h4>
-          <div className="flex gap-x-[4px]">
-            <PetsRating rating={4} reviews={5} />
+          <PetsTitle title={title} />
+          <div className="flex items-end justify-center gap-x-[4px]">
+            <PetsRating popularity={popularity} />
           </div>
         </div>
         <div className="mb-[16px]">
           <PetsOptionList
             data={{
-              name: "coco",
-              birthday: "2019-08-12",
-              sex: "doggy",
-              species: "smth",
+              name,
+              birthday,
+              sex,
+              species,
             }}
           />
         </div>
         <div className="mb-[32px]">
-          <PetsComment comment="Adorable puppy looking for a loving home." />
+          <PetsComment comment={comment} styles="text-center" />
         </div>
         <div className="mb-[20px]">
-          <PetsPrice price="257.99" />
+          <PetsPrice price={price} />
         </div>
         <div className="flex items-center gap-x-[10px]">
           <ActionBtns closeModal={closeModal} />

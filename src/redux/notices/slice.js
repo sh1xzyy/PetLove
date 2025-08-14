@@ -22,6 +22,11 @@ const initialState = {
 const slice = createSlice({
   name: "notices",
   initialState,
+  reducers: {
+    clearPetsAdditionalInfo(state) {
+      state.petsAdditionalInfo = {};
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPetsNoticesThunk.fulfilled, (state, action) => {
@@ -41,8 +46,8 @@ const slice = createSlice({
         state.species = action.payload;
       })
       .addCase(getPetsAdditionalInfoThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.petsAdditionalInfo = action.payload;
+        state.isLoading = false;
       })
       .addCase(addPetToFavoriteThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -84,3 +89,4 @@ const slice = createSlice({
 });
 
 export const noticesReducer = slice.reducer;
+export const { clearPetsAdditionalInfo } = slice.actions;

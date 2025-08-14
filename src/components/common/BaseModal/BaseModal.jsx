@@ -30,7 +30,7 @@ const BaseModal = ({ styles, children, setIsModalOpen, closeModal }) => {
           }
         >
           <svg className="linear h-[24px] w-[24px] stroke-slate-950 text-slate-950 transition duration-[250ms] hover:stroke-grey-40 hover:text-grey-40">
-            <use href="/public/icons/sprite.svg#icon-close"></use>
+            <use href="/icons/sprite.svg#icon-close"></use>
           </svg>
         </button>
         {children}
