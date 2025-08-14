@@ -21,6 +21,7 @@ const ModalNotice = () => {
   const {
     birthday,
     species,
+    category,
     title,
     imgURL,
     name,
@@ -47,7 +48,7 @@ const ModalNotice = () => {
       closeModal={closeModal}
     >
       <div className="flex flex-col items-center">
-        <PetsImg imgURL={imgURL} />
+        <PetsImg imgURL={imgURL} category={category} />
         <div className="mb-[24px] md:mb-[20px]">
           <PetsTitle title={title} />
           <div className="flex items-end justify-center gap-x-[4px]">
@@ -68,7 +69,7 @@ const ModalNotice = () => {
           <PetsComment comment={comment} styles="text-center" />
         </div>
         <div className="mb-[20px]">
-          <PetsPrice price={price} />
+          <PetsPrice price={price} category={category} />
         </div>
         <div className="flex items-center gap-x-[10px]">
           <ActionBtns closeModal={closeModal} />

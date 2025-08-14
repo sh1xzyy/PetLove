@@ -8,6 +8,7 @@ import {
   getPetsSpeciesThunk,
   removePetFromFavoritesThunk,
 } from "./operations";
+import { getPartOfCurrentUserInfoThunk } from "../users/operations";
 
 const initialState = {
   isLoading: false,
@@ -16,7 +17,7 @@ const initialState = {
   sex: [],
   species: [],
   petsAdditionalInfo: {},
-  favoritePetsList: [],
+  noticesFavorites: [],
 };
 
 const slice = createSlice({
@@ -29,6 +30,10 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getPartOfCurrentUserInfoThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.noticesFavorites = action.payload.noticesFavorites;
+      })
       .addCase(getPetsNoticesThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.petsList = action.payload.results;
@@ -51,11 +56,11 @@ const slice = createSlice({
       })
       .addCase(addPetToFavoriteThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.favoritePetsList = action.payload;
+        state.noticesFavorites = action.payload;
       })
       .addCase(removePetFromFavoritesThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.favoritePetsList = action.payload;
+        state.noticesFavorites = action.payload;
       })
       .addMatcher(
         isAnyOf(
@@ -66,6 +71,7 @@ const slice = createSlice({
           getPetsAdditionalInfoThunk.rejected,
           addPetToFavoriteThunk.rejected,
           removePetFromFavoritesThunk.rejected,
+          getPartOfCurrentUserInfoThunk.rejected,
         ),
         (state) => {
           state.isLoading = false;
@@ -80,6 +86,7 @@ const slice = createSlice({
           getPetsAdditionalInfoThunk.pending,
           addPetToFavoriteThunk.pending,
           removePetFromFavoritesThunk.pending,
+          getPartOfCurrentUserInfoThunk.pending,
         ),
         (state) => {
           state.isLoading = true;

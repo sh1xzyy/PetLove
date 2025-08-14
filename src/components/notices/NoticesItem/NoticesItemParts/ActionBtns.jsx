@@ -1,12 +1,29 @@
 import { Link, useLocation } from "react-router";
 import { useAddPetToFavorite } from "../../../../features/favorites/addPetToFavorite/useAddPetToFavorite";
 import { useRemovePetFromFavorite } from "../../../../features/favorites/removePetFromFavorite/useRemovePetFromFavorite";
+import { useSelector } from "react-redux";
+import { selectNoticesFavoritesId } from "../../../../redux/notices/selectors";
+import clsx from "clsx";
 
 const ActionBtns = ({ id, setIsAttentionModalOpen }) => {
   const { removePetFromFavorite } = useRemovePetFromFavorite();
+  const favoritesIds = useSelector(selectNoticesFavoritesId);
   const { addPetToFavorite } = useAddPetToFavorite();
   const location = useLocation();
   const isLoggedIn = true;
+
+  const isFavorite = favoritesIds?.includes(id);
+
+  const toggleFavorite = async (id) => {
+    console.log(favoritesIds);
+    console.log(isFavorite);
+
+    if (isFavorite) {
+      await removePetFromFavorite(id);
+    } else {
+      await addPetToFavorite(id);
+    }
+  };
 
   return (
     <>
@@ -19,9 +36,14 @@ const ActionBtns = ({ id, setIsAttentionModalOpen }) => {
         Learn more
       </Link>
       <button
-        className="linear flex h-[46px] w-[46px] items-center justify-center rounded-full bg-bg-cream transition duration-[250ms] hover:bg-dark-orange md:h-[48px] md:w-[48px]"
+        className={clsx(
+          "linear flex h-[46px] w-[46px] items-center justify-center rounded-full transition duration-[250ms] md:h-[48px] md:w-[48px]",
+          isFavorite
+            ? "bg-dark-orange hover:bg-bg-cream"
+            : "bg-bg-cream hover:bg-dark-orange",
+        )}
         type="button"
-        onClick={() => removePetFromFavorite(id)}
+        onClick={() => toggleFavorite(id)}
       >
         <svg className="h-[18px] w-[18px] stroke-accent-orange text-transparent">
           <use href="/icons/sprite.svg#icon-heart"></use>

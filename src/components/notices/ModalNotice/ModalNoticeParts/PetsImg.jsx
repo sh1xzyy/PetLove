@@ -1,6 +1,7 @@
 import clsx from "clsx";
+import { categoryPrettier } from "../../../../utils/notices/categoryPrettier";
 
-const PetsImg = ({ imgURL }) => {
+const PetsImg = ({ imgURL, category }) => {
   return (
     <div
       className={clsx(
@@ -18,7 +19,7 @@ const PetsImg = ({ imgURL }) => {
           />
           <div className="absolute left-0 top-0 flex h-[32px] w-[48px] items-center justify-center rounded-[30px] bg-bg-cream px-[14px] md:h-[34px] md:w-[52px]">
             <span className="text-[12px] font-medium leading-[1.33] tracking-[-0.02em] text-accent-orange md:text-[14px] md:leading-[1.28]">
-              Sell
+              {categoryPrettier(category)}
             </span>
           </div>
         </>
