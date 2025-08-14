@@ -119,7 +119,6 @@ const NotFoundPage = lazy(
 function App() {
   const { isAttentionModalOpen, setIsAttentionModalOpen } =
     useModalAttentionContext();
-
   const dispatch = useDispatch();
 
   useEffect(() => {

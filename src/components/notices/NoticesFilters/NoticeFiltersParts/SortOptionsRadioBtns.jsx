@@ -59,7 +59,7 @@ const SortOptionsRadioBtns = () => {
               type="radio"
               value={value}
               checked={isActive}
-              onClick={() => toggleRadioBtn(name, boolValue)}
+              onChange={() => toggleRadioBtn(name, boolValue)}
             />
             <span>{label}</span>
           </label>

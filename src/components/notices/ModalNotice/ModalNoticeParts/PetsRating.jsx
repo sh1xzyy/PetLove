@@ -1,24 +1,24 @@
 import { Rating } from "react-simple-star-rating";
 
-const PetsRating = ({ rating, reviews }) => {
+const PetsRating = ({ rating = 5, popularity }) => {
   return (
     <>
       <Rating
         initialValue={rating}
         readonly={true}
         emptyIcon={
-          <svg width={16} height={16}>
-            <use href="/public/icons/sprite.svg#icon-empty-star"></use>
+          <svg className="inline-block h-[16px] w-[16px]">
+            <use href="/icons/sprite.svg#icon-empty-star"></use>
           </svg>
         }
         fillIcon={
-          <svg width={16} height={16}>
-            <use href="/public/icons/sprite.svg#icon-star"></use>
+          <svg className="inline-block h-[16px] w-[16px]">
+            <use href="/icons/sprite.svg#icon-star"></use>
           </svg>
         }
       />
       <span className="text-[14px] font-medium leading-[1.43] text-grey-800">
-        {reviews}
+        {popularity}
       </span>
     </>
   );

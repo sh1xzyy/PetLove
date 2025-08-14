@@ -6,23 +6,15 @@ import { selectOptionsSelector } from "../../../redux/notices/selectors";
 import SortOptionsRadioBtns from "./NoticeFiltersParts/SortOptionsRadioBtns";
 import Selector from "./NoticeFiltersParts/Selector";
 import { useGetPetsOptions } from "../../../features/notices/getPetsOptions/useGetPetsOptions";
-import { useEffect } from "react";
 
 const NoticesFilters = () => {
   const { categories, sex, species } = useSelector(selectOptionsSelector);
-  const { defaultValues, onSubmit } = useNoticesForm();
+  const { defaultValues } = useNoticesForm();
   const methods = useForm({
     defaultValues,
   });
 
-  const { watch } = methods;
-  const values = watch();
-
   useGetPetsOptions();
-
-  useEffect(() => {
-    onSubmit(values);
-  }, [values, onSubmit]);
 
   return (
     <div className="rounded-[30px] bg-bg-cream px-[20px] py-[20px] md:px-[32px] md:py-[40px]">

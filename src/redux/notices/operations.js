@@ -11,23 +11,25 @@ import {
 
 export const getPetsNoticesThunk = createAsyncThunk(
   "/notices",
-  async (params, { rejectWithValue }) => {
+  async (params, thunkAPI) => {
     try {
-      const data = await getPetsNotices(params);
+      const data = await getPetsNotices(params, thunkAPI);
       return data;
     } catch (error) {
-      return rejectWithValue("Something went wrong with your pet search");
+      return thunkAPI.rejectWithValue(
+        "Something went wrong with your pet search",
+      );
     }
   },
 );
 export const getPetsCategoriesThunk = createAsyncThunk(
   "/notices/categories",
-  async (_, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
       const data = await getPetsCategories();
       return data;
     } catch (error) {
-      return rejectWithValue(
+      return thunkAPI.rejectWithValue(
         "Something went wrong with uploading Pets Categories",
       );
     }
@@ -36,24 +38,26 @@ export const getPetsCategoriesThunk = createAsyncThunk(
 
 export const getPetsSexThunk = createAsyncThunk(
   "/notices/sex",
-  async (_, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
       const data = await getPetsSex();
       return data;
     } catch (error) {
-      return rejectWithValue("Something went wrong with uploading Pets Sex");
+      return thunkAPI.rejectWithValue(
+        "Something went wrong with uploading Pets Sex",
+      );
     }
   },
 );
 
 export const getPetsSpeciesThunk = createAsyncThunk(
   "/notices/species",
-  async (_, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
       const data = await getPetsSpecies();
       return data;
     } catch (error) {
-      return rejectWithValue(
+      return thunkAPI.rejectWithValue(
         "Something went wrong with uploading Pets Species",
       );
     }
@@ -62,12 +66,12 @@ export const getPetsSpeciesThunk = createAsyncThunk(
 
 export const getPetsAdditionalInfoThunk = createAsyncThunk(
   "/notices/{id}",
-  async (id, { rejectWithValue }) => {
+  async (id, thunkAPI) => {
     try {
-      const data = await getPetsAdditionalInfo(id);
+      const data = await getPetsAdditionalInfo(id, thunkAPI);
       return data;
     } catch (error) {
-      return rejectWithValue(
+      return thunkAPI.rejectWithValue(
         "Something went wrong with getting additional info about pet",
       );
     }
@@ -76,12 +80,12 @@ export const getPetsAdditionalInfoThunk = createAsyncThunk(
 
 export const addPetToFavoriteThunk = createAsyncThunk(
   "/notices/favorites/add/{id}",
-  async (id, { rejectWithValue }) => {
+  async (id, thunkAPI) => {
     try {
-      const data = await addPetToFavorite(id);
+      const data = await addPetToFavorite(id, thunkAPI);
       return data;
     } catch (error) {
-      return rejectWithValue(
+      return thunkAPI.rejectWithValue(
         "Something went wrong with adding pet to favorite",
       );
     }
@@ -90,12 +94,12 @@ export const addPetToFavoriteThunk = createAsyncThunk(
 
 export const removePetFromFavoritesThunk = createAsyncThunk(
   "notices/favorites/remove/{id}",
-  async (id, { rejectWithValue }) => {
+  async (id, thunkAPI) => {
     try {
-      const data = await removePetFromFavorite(id);
+      const data = await removePetFromFavorite(id, thunkAPI);
       return data;
     } catch (error) {
-      return rejectWithValue(
+      return thunkAPI.rejectWithValue(
         "Something went wrong with removing pet from favorites",
       );
     }
