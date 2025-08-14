@@ -17,13 +17,34 @@ export const clearToken = () => {
   authInstance.defaults.headers.common["Authorization"] = "";
 };
 
+// Get current user
+
+export const getPartOfCurrentUserInfo = async (thunkAPI) => {
+  try {
+    const { token } = thunkAPI.getState().users;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue("No token");
+    }
+
+    const response = await axios.get(`${API_KEY}/users/current`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 // Add Pet
 export const addPet = async (body, thunkAPI) => {
   try {
     const { token } = thunkAPI.getState().users;
 
     if (!token) {
-      return thunkAPI.rejectWithValue("No accessToken");
+      return thunkAPI.rejectWithValue("No token");
     }
 
     const response = await axios.post(
@@ -51,9 +72,9 @@ export const getPetsNotices = async ({
   category = "",
   species = "",
   locationId = "",
-  byDate = false,
-  byPrice = false,
-  byPopularity = false,
+  byDate = true,
+  byPrice = null,
+  byPopularity = null,
   page = 1,
   limit = 6,
   sex = "",
@@ -131,7 +152,7 @@ export const getPetsAdditionalInfo = async (id, thunkAPI) => {
     const { token } = thunkAPI.getState().users;
 
     if (!token) {
-      return thunkAPI.rejectWithValue("No accessToken");
+      return thunkAPI.rejectWithValue("No token");
     }
     const response = await axios.get(`${API_KEY}/notices/${id}`, {
       headers: {
@@ -152,14 +173,17 @@ export const addPetToFavorite = async (id, thunkAPI) => {
     const { token } = thunkAPI.getState().users;
 
     if (!token) {
-      return thunkAPI.rejectWithValue("No accessToken");
+      return thunkAPI.rejectWithValue("No token");
     }
+
+    console.log(token);
+
     const response = await axios.post(
       `${API_KEY}/notices/favorites/add/${id}`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
       },
     );
@@ -176,14 +200,13 @@ export const removePetFromFavorite = async (id, thunkAPI) => {
     const { token } = thunkAPI.getState().users;
 
     if (!token) {
-      return thunkAPI.rejectWithValue("No accessToken");
+      return thunkAPI.rejectWithValue("No token");
     }
     const response = await axios.delete(
       `${API_KEY}/notices/favorites/remove/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
       },
     );

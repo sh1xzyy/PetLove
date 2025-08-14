@@ -30,17 +30,11 @@ const slice = createSlice({
       .addCase(addPetThunk.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(registerUserThunk.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(registerUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-      })
-      .addCase(registerUserThunk.rejected, (state) => {
-        state.isLoading = false;
       })
       .addCase(loginUserThunk.pending, (state) => {
         state.isLoading = true;
@@ -56,14 +50,8 @@ const slice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(logoutUserThunk.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(logoutUserThunk.fulfilled, () => {
         return initialState;
-      })
-      .addCase(logoutUserThunk.rejected, (state) => {
-        state.isLoading = false;
       })
       .addCase(refreshUserThunk.pending, (state) => {
         state.isRefreshing = true;
@@ -78,12 +66,26 @@ const slice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addMatcher(isAnyOf(addPetThunk.rejected), (state) => {
-        state.isLoading = false;
-      })
-      .addMatcher(isAnyOf(addPetThunk.pending), (state) => {
-        state.isLoading = true;
-      });
+      .addMatcher(
+        isAnyOf(
+          addPetThunk.pending,
+          logoutUserThunk.pending,
+          registerUserThunk.pending,
+          (state) => {
+            state.isLoading = true;
+          },
+        ),
+      )
+      .addMatcher(
+        isAnyOf(
+          addPetThunk.rejected,
+          logoutUserThunk.rejected,
+          registerUserThunk.rejected,
+          (state) => {
+            state.isLoading = false;
+          },
+        ),
+      );
   },
 });
 

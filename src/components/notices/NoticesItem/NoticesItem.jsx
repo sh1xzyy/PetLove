@@ -48,7 +48,7 @@ const NoticesItem = ({
         </div>
         <div className="flex h-full flex-col justify-end">
           <div className="mb-[12px]">
-            <PetsPrice price={price} />
+            <PetsPrice price={price} category={category} />
           </div>
           <div className="flex items-center gap-x-[10px]">
             <ActionBtns

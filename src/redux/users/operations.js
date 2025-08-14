@@ -1,5 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addPet, addToken, authInstance, clearToken } from "../API/API";
+import {
+  addPet,
+  addToken,
+  authInstance,
+  clearToken,
+  getPartOfCurrentUserInfo,
+} from "../API/API";
 
 export const addPetThunk = createAsyncThunk(
   "/users/current/pets/add",
@@ -67,6 +73,20 @@ export const refreshUserThunk = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const getPartOfCurrentUserInfoThunk = createAsyncThunk(
+  "/users/current",
+  async (_, thunkAPI) => {
+    try {
+      const data = await getPartOfCurrentUserInfo(thunkAPI);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        "Something went wrong with getting part of user data",
+      );
     }
   },
 );

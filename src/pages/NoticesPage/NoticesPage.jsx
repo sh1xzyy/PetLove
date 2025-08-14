@@ -3,12 +3,27 @@ import Container from "../../components/common/Container/Container";
 import Title from "../../components/common/Title/Title";
 import NoticesFilters from "../../components/notices/NoticesFilters/NoticesFilters";
 import NoticesList from "../../components/notices/NoticesList/NoticesList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoading } from "../../redux/notices/selectors";
 import Loader from "../../components/common/Loader/Loader";
+import { useEffect } from "react";
+import { getPartOfCurrentUserInfoThunk } from "../../redux/users/operations";
+import toast from "react-hot-toast";
 
 const NoticesPage = () => {
   const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getPartOfCurrentUserInfoThunk()).unwrap();
+      } catch (error) {
+        toast.error(error);
+      }
+    };
+    fetchData();
+  }, [dispatch]);
   return (
     <>
       {isLoading && <Loader />}
