@@ -94,7 +94,8 @@ import { useModalAttentionContext } from "../../contexts/ModalAttentionContext/u
 import ModalAttention from "../common/ModalAttention/ModalAttention.jsx";
 import ModalNotice from "../notices/ModalNotice/ModalNotice.jsx";
 import { refreshUserThunk } from "../../redux/users/operations.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/users/selectors.js";
 const MainPage = lazy(() => import("../../pages/MainPage/MainPage"));
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const NewsPage = lazy(() => import("../../pages/NewsPage/NewsPage"));
@@ -120,6 +121,9 @@ function App() {
   const { isAttentionModalOpen, setIsAttentionModalOpen } =
     useModalAttentionContext();
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  console.log(isLoggedIn);
 
   useEffect(() => {
     dispatch(refreshUserThunk());

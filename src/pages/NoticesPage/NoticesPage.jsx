@@ -9,8 +9,10 @@ import Loader from "../../components/common/Loader/Loader";
 import { useEffect } from "react";
 import { getPartOfCurrentUserInfoThunk } from "../../redux/users/operations";
 import toast from "react-hot-toast";
+import { selectIsLoggedIn } from "../../redux/users/selectors";
 
 const NoticesPage = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
 
@@ -22,8 +24,10 @@ const NoticesPage = () => {
         toast.error(error);
       }
     };
-    fetchData();
-  }, [dispatch]);
+    if (isLoggedIn) {
+      fetchData();
+    }
+  }, [dispatch, isLoggedIn]);
   return (
     <>
       {isLoading && <Loader />}

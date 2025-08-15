@@ -6,6 +6,8 @@ export const useAddPetForm = (reset) => {
   const dispatch = useDispatch();
 
   const onSubmit = async (value) => {
+    console.log(value);
+
     try {
       await dispatch(addPetThunk(value)).unwrap();
       toast.success("Successfully added a new pet!");

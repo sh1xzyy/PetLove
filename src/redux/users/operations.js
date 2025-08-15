@@ -9,12 +9,12 @@ import {
 
 export const addPetThunk = createAsyncThunk(
   "/users/current/pets/add",
-  async (body, { rejectWithValue }) => {
+  async (body, thunkAPI) => {
     try {
-      const data = await addPet(body);
+      const data = await addPet(body, thunkAPI);
       return data;
     } catch (error) {
-      return rejectWithValue("Something went wrong with adding a pet");
+      return thunkAPI.rejectWithValue("Something went wrong with adding a pet");
     }
   },
 );
