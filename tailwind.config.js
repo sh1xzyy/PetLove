@@ -23,6 +23,7 @@ export default {
         "grey-30": "var(--grey-30)",
         "grey-40": "var(--grey-40)",
         "grey-15": "var(--grey-15)",
+        "grey-08": "var(--grey-08)",
         "grey-06:": "var(--grey-06)",
         "grey-05": "var(--grey-05)",
         "grey-005": "var(--grey-005)",
