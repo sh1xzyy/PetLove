@@ -8,6 +8,7 @@ export const useAddPetToFavorite = () => {
   const addPetToFavorite = async (id) => {
     try {
       await dispatch(addPetToFavoriteThunk(id)).unwrap();
+      toast.success("Successfully added a pet to favorite");
     } catch (error) {
       toast.error(error);
     }

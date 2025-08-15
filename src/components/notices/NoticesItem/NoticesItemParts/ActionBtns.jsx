@@ -4,20 +4,18 @@ import { useRemovePetFromFavorite } from "../../../../features/favorites/removeP
 import { useSelector } from "react-redux";
 import { selectNoticesFavoritesId } from "../../../../redux/notices/selectors";
 import clsx from "clsx";
+import { selectIsLoggedIn } from "../../../../redux/users/selectors";
 
 const ActionBtns = ({ id, setIsAttentionModalOpen }) => {
   const { removePetFromFavorite } = useRemovePetFromFavorite();
   const favoritesIds = useSelector(selectNoticesFavoritesId);
   const { addPetToFavorite } = useAddPetToFavorite();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const location = useLocation();
-  const isLoggedIn = true;
 
   const isFavorite = favoritesIds?.includes(id);
 
   const toggleFavorite = async (id) => {
-    console.log(favoritesIds);
-    console.log(isFavorite);
-
     if (isFavorite) {
       await removePetFromFavorite(id);
     } else {
@@ -43,7 +41,9 @@ const ActionBtns = ({ id, setIsAttentionModalOpen }) => {
             : "bg-bg-cream hover:bg-dark-orange",
         )}
         type="button"
-        onClick={() => toggleFavorite(id)}
+        onClick={() =>
+          !isLoggedIn ? setIsAttentionModalOpen(true) : toggleFavorite(id)
+        }
       >
         <svg className="h-[18px] w-[18px] stroke-accent-orange text-transparent">
           <use href="/icons/sprite.svg#icon-heart"></use>

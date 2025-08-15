@@ -8,6 +8,7 @@ export const useRemovePetFromFavorite = () => {
   const removePetFromFavorite = async (id) => {
     try {
       await dispatch(removePetFromFavoritesThunk(id)).unwrap();
+      toast.success("Successfully removed a pet to favorite");
     } catch (error) {
       toast.error(error);
     }

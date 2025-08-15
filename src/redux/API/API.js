@@ -18,7 +18,6 @@ export const clearToken = () => {
 };
 
 // Get current user
-
 export const getPartOfCurrentUserInfo = async (thunkAPI) => {
   try {
     const { token } = thunkAPI.getState().users;
@@ -111,7 +110,6 @@ export const getPetsCategories = async () => {
         "Content-Type": "application/json",
       },
     });
-    console.log("ResponseData:1", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);
@@ -125,7 +123,6 @@ export const getPetsSex = async () => {
         "Content-Type": "application/json",
       },
     });
-    console.log("ResponseData:2", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);
@@ -139,7 +136,6 @@ export const getPetsSpecies = async () => {
         "Content-Type": "application/json",
       },
     });
-    console.log("ResponseData:3", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);
@@ -160,7 +156,6 @@ export const getPetsAdditionalInfo = async (id, thunkAPI) => {
         "Content-Type": "application/json",
       },
     });
-    console.log("ResponseData:4", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);
@@ -176,8 +171,6 @@ export const addPetToFavorite = async (id, thunkAPI) => {
       return thunkAPI.rejectWithValue("No token");
     }
 
-    console.log(token);
-
     const response = await axios.post(
       `${API_KEY}/notices/favorites/add/${id}`,
       {},
@@ -187,7 +180,6 @@ export const addPetToFavorite = async (id, thunkAPI) => {
         },
       },
     );
-    console.log("ResponseData:5", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);
@@ -210,7 +202,6 @@ export const removePetFromFavorite = async (id, thunkAPI) => {
         },
       },
     );
-    console.log("ResponseData:6", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);
