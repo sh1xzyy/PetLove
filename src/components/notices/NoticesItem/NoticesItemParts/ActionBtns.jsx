@@ -1,27 +1,13 @@
 import { Link, useLocation } from "react-router";
-import { useAddPetToFavorite } from "../../../../features/favorites/addPetToFavorite/useAddPetToFavorite";
-import { useRemovePetFromFavorite } from "../../../../features/favorites/removePetFromFavorite/useRemovePetFromFavorite";
 import { useSelector } from "react-redux";
-import { selectNoticesFavoritesId } from "../../../../redux/notices/selectors";
 import clsx from "clsx";
 import { selectIsLoggedIn } from "../../../../redux/users/selectors";
+import { useToggleFavorite } from "../../../../features/favorites/toggleFavorite/useToggleFavorite";
 
 const ActionBtns = ({ id, setIsAttentionModalOpen }) => {
-  const { removePetFromFavorite } = useRemovePetFromFavorite();
-  const favoritesIds = useSelector(selectNoticesFavoritesId);
-  const { addPetToFavorite } = useAddPetToFavorite();
+  const { toggleFavorite, isFavorite } = useToggleFavorite(id);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const location = useLocation();
-
-  const isFavorite = favoritesIds?.includes(id);
-
-  const toggleFavorite = async (id) => {
-    if (isFavorite) {
-      await removePetFromFavorite(id);
-    } else {
-      await addPetToFavorite(id);
-    }
-  };
 
   return (
     <>

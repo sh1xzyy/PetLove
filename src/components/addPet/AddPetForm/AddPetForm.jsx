@@ -48,10 +48,9 @@ const AddPetForm = () => {
             <div className="relative mb-[8px] flex gap-x-[8px] md:-mb-[40px]">
               <SexRadioButtons />
             </div>
-            {/*  */}
             {/* Photo Preview */}
             <div
-              className="linear relative m-auto mb-[6px] flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full bg-bg-cream transition duration-[250ms] hover:animate-spin-slow hover:bg-dark-orange md:-mb-[6px] md:h-[86px] md:w-[86px]"
+              className="linear relative m-auto mb-[6px] flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full bg-bg-cream hover:bg-dark-orange md:-mb-[6px] md:h-[86px] md:w-[86px]"
               onClick={() => fileInputRef.current?.click()}
             >
               <PhotoPreview
