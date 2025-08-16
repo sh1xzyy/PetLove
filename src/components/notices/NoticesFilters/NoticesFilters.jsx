@@ -5,7 +5,7 @@ import { selectOptionsSelector } from "../../../redux/notices/selectors";
 import SortOptionsRadioBtns from "./NoticeFiltersParts/SortOptionsRadioBtns";
 import Selector from "./NoticeFiltersParts/Selector";
 import { useGetPetsOptions } from "../../../features/notices/getPetsOptions/useGetPetsOptions";
-import { useFiltersChange } from "../../../features/notices/getPetsByFilter/useFiltersChange.JS";
+import { useFiltersChange } from "../../../features/notices/getPetsByFilter/useFiltersChange.js";
 import SearchField from "../../common/SearchField/SearchField";
 import { defaultValues } from "../../../features/notices/getPetsByFilter/defaultValues";
 
