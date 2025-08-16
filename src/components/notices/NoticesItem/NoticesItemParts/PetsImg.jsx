@@ -14,6 +14,7 @@ const PetsImg = ({ imgURL }) => {
           className="max-h-[178px] w-full rounded-[16px] object-cover"
           src={imgURL}
           alt="photo of pet"
+          loading="lazy"
         />
       ) : (
         <svg className="h-[50px] w-[50px] text-accent-orange md:h-[65px] md:w-[65px]">
