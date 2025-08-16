@@ -1,24 +1,9 @@
 import clsx from "clsx";
 import { buttonClass } from "./commonClasses/commonClasses";
-import { useSelector } from "react-redux";
-import { useRemovePetFromFavorite } from "../../../../features/favorites/removePetFromFavorite/useRemovePetFromFavorite";
-import { selectNoticesFavoritesId } from "../../../../redux/notices/selectors";
-import { useAddPetToFavorite } from "../../../../features/favorites/addPetToFavorite/useAddPetToFavorite";
+import { useToggleFavorite } from "../../../../features/favorites/toggleFavorite/useToggleFavorite";
 
 const ActionBtns = ({ id, phone, closeModal }) => {
-  const { removePetFromFavorite } = useRemovePetFromFavorite();
-  const favoritesIds = useSelector(selectNoticesFavoritesId);
-  const { addPetToFavorite } = useAddPetToFavorite();
-
-  const isFavorite = favoritesIds?.includes(id);
-
-  const toggleFavorite = async (id) => {
-    if (isFavorite) {
-      await removePetFromFavorite(id);
-    } else {
-      await addPetToFavorite(id);
-    }
-  };
+  const { toggleFavorite, isFavorite } = useToggleFavorite(id);
 
   return (
     <>
