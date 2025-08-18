@@ -1,5 +1,6 @@
 import axios from "axios";
 
+const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const authInstance = axios.create({
@@ -15,6 +16,24 @@ export const addToken = (token) => {
 
 export const clearToken = () => {
   authInstance.defaults.headers.common["Authorization"] = "";
+};
+
+// Upload correct img to cloudinary
+export const uploadImageToCloudinary = async (formData) => {
+  try {
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 // Get current user

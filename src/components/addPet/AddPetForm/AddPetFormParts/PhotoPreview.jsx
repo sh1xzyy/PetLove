@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { handleFileChange } from "../../../../utils/addPet/handleFileChange";
 import clsx from "clsx";
+import { handleFileChange } from "../../../../features/addPet/handleFileChange/handleFileChange";
 
 const PhotoPreview = ({
   hasUserSelectPhoto,

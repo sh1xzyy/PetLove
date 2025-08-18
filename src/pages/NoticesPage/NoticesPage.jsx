@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import Container from "../../components/common/Container/Container";
 import Title from "../../components/common/Title/Title";
 import NoticesFilters from "../../components/notices/NoticesFilters/NoticesFilters";
