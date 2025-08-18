@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import BaseModal from "../BaseModal/BaseModal";
 import clsx from "clsx";
 import { buttonClass } from "./commonClasses/commonClasses";

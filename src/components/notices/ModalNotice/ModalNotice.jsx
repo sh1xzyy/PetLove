@@ -4,7 +4,7 @@ import {
   selectIsLoading,
   selectPetsAdditionalInfo,
 } from "../../../redux/notices/selectors";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useParams } from "react-router-dom";
 import { useCloseModal } from "../../../hooks/useCloseModal";
 import { useGetPetsAdditionalInfo } from "../../../features/modalNotice/useGetPetsAdditionalInfo";
 import ActionBtns from "./ModalNoticeParts/ActionBtns";
