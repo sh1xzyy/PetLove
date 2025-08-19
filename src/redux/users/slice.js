@@ -71,20 +71,20 @@ const slice = createSlice({
           addPetThunk.pending,
           logoutUserThunk.pending,
           registerUserThunk.pending,
-          (state) => {
-            state.isLoading = true;
-          },
         ),
+        (state) => {
+          state.isLoading = true;
+        },
       )
       .addMatcher(
         isAnyOf(
           addPetThunk.rejected,
           logoutUserThunk.rejected,
           registerUserThunk.rejected,
-          (state) => {
-            state.isLoading = false;
-          },
         ),
+        (state) => {
+          state.isLoading = false;
+        },
       );
   },
 });

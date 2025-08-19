@@ -8,10 +8,10 @@ export const uploadImageToCloudinaryThunk = createAsyncThunk(
       const data = await uploadImageToCloudinary(formData);
       return data;
     } catch (error) {
-      return rejectWithValue(
-        "Something went wrong with uploading pets img",
+      return rejectWithValue({
+        message: "Something went wrong with uploading img",
         error,
-      );
+      });
     }
   },
 );
