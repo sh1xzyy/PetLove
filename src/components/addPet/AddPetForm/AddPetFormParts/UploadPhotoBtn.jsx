@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
-import { handleFileChange } from "../../../../features/addPet/handleFileChange/handleFileChange";
+import { useHandleFileChange } from "../../../../features/addPet/useHandleFileChange/useHandleFileChange";
 
 const UploadPhotoBtn = ({ setHasUserSelectPhoto }) => {
+  const { handleFileChange } = useHandleFileChange();
   const fileInputRef = useRef(null);
   const { setValue } = useFormContext();
 

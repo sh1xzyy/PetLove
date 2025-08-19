@@ -5,6 +5,7 @@ import newsReducer from "./news/slices";
 import { friendsReducer } from "./friends/slices";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import { cloudinaryReducer } from "./cloudinary/slice";
 
 const usersPersistConfig = {
   key: "users",
@@ -18,6 +19,7 @@ export const store = configureStore({
     notices: noticesReducer,
     news: newsReducer,
     friends: friendsReducer,
+    cloudinary: cloudinaryReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

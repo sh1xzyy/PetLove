@@ -18,17 +18,12 @@ export const clearToken = () => {
   authInstance.defaults.headers.common["Authorization"] = "";
 };
 
-// Upload correct img to cloudinary
+// Upload img to Cloudinary
 export const uploadImageToCloudinary = async (formData) => {
   try {
     const response = await axios.post(
       `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
       formData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
     );
     return response.data;
   } catch (error) {
@@ -75,7 +70,6 @@ export const addPet = async (body, thunkAPI) => {
         },
       },
     );
-    console.log("ResponseData:", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);

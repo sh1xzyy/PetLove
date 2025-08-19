@@ -1,12 +1,17 @@
 import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
-import { handleFileChange } from "../../../../features/addPet/handleFileChange/handleFileChange";
+import { useHandleFileChange } from "../../../../features/addPet/useHandleFileChange/useHandleFileChange";
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "../../../../redux/cloudinary/selectors";
+import Loader from "../../../common/Loader/Loader";
 
 const PhotoPreview = ({
   hasUserSelectPhoto,
   setHasUserSelectPhoto,
   fileInputRef,
 }) => {
+  const { handleFileChange } = useHandleFileChange();
+  const isLoading = useSelector(selectIsLoading);
   const { watch, setValue } = useFormContext();
   const imgURL = watch("imgURL");
 
@@ -25,7 +30,9 @@ const PhotoPreview = ({
           className="visually-hidden"
           onChange={(e) => handleFileChange(e, setValue, setHasUserSelectPhoto)}
         />
-        {hasUserSelectPhoto && imgURL ? (
+        {isLoading ? (
+          <Loader custom={true} size={8} />
+        ) : hasUserSelectPhoto && imgURL ? (
           <img
             className="h-[68px] w-[68px] rounded-full object-fill md:h-[86px] md:w-[86px]"
             src={imgURL}
