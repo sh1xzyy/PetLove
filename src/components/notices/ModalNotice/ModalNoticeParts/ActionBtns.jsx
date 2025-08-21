@@ -1,7 +1,10 @@
 import clsx from "clsx";
 import { buttonClass } from "./commonClasses/commonClasses";
+import { useToggleFavorite } from "../../../../features/favorites/toggleFavorite/useToggleFavorite";
 
-const ActionBtns = ({ closeModal }) => {
+const ActionBtns = ({ id, phone, closeModal }) => {
+  const { toggleFavorite, isFavorite } = useToggleFavorite(id);
+
   return (
     <>
       <button
@@ -11,23 +14,29 @@ const ActionBtns = ({ closeModal }) => {
           "group",
         )}
         type="button"
-        onClick={() => closeModal()}
+        onClick={() => toggleFavorite(id)}
       >
-        Add to
-        <svg className="linear h-[18px] w-[18px] stroke-light-white text-transparent transition duration-[250ms] group-hover:stroke-accent-orange">
-          <use href="/icons/sprite.svg#icon-heart"></use>
-        </svg>
+        {isFavorite ? (
+          "Remove"
+        ) : (
+          <>
+            Add to
+            <svg className="linear h-[18px] w-[18px] stroke-light-white text-transparent transition duration-[250ms] group-hover:stroke-accent-orange">
+              <use href="/icons/sprite.svg#icon-heart"></use>
+            </svg>
+          </>
+        )}
       </button>
-      <button
+      <a
         className={clsx(
           buttonClass,
-          "bg-bg-cream text-accent-orange hover:bg-dark-orange",
+          "flex items-center justify-center bg-bg-cream text-accent-orange hover:bg-dark-orange",
         )}
-        type="button"
+        href={`tel:${phone}`}
         onClick={() => closeModal()}
       >
         Contact
-      </button>
+      </a>
     </>
   );
 };

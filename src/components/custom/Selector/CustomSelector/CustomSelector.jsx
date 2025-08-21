@@ -3,6 +3,7 @@ import DropdownIndicator from "../DropDownIndicator/DropDownIndicator";
 import { customStyles } from "./customStyles";
 import { useFormContext, Controller } from "react-hook-form";
 import { correctOptionsFormat } from "../../../../utils/common/correctOptionsFormat";
+import { mergeSelectStyles } from "../../../../utils/customSelector/mergeSelectStyles";
 
 const CustomSelector = ({
   name,
@@ -34,7 +35,7 @@ const CustomSelector = ({
         <Select
           {...field}
           options={correctOptions}
-          styles={{ ...customStyles, ...additionalStyles }}
+          styles={mergeSelectStyles(customStyles, additionalStyles)}
           components={{ DropdownIndicator }}
           placeholder={placeholder}
           value={

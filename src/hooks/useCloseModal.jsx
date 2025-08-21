@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { clearPetsAdditionalInfo } from "../redux/notices/slice";
 
 export const useCloseModal = (backLink) => {

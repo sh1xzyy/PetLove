@@ -4,7 +4,7 @@ import {
   selectIsLoading,
   selectPetsAdditionalInfo,
 } from "../../../redux/notices/selectors";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useParams } from "react-router-dom";
 import { useCloseModal } from "../../../hooks/useCloseModal";
 import { useGetPetsAdditionalInfo } from "../../../features/modalNotice/useGetPetsAdditionalInfo";
 import ActionBtns from "./ModalNoticeParts/ActionBtns";
@@ -29,6 +29,7 @@ const ModalNotice = () => {
     comment,
     sex,
     price,
+    user: { phone } = {},
   } = petsAdditionalInfo;
   const location = useLocation();
   const backLink = location.state?.backgroundLocation?.pathname ?? "/notices";
@@ -72,7 +73,7 @@ const ModalNotice = () => {
           <PetsPrice price={price} category={category} />
         </div>
         <div className="flex items-center gap-x-[10px]">
-          <ActionBtns closeModal={closeModal} />
+          <ActionBtns id={id} phone={phone} closeModal={closeModal} />
         </div>
       </div>
     </BaseModal>

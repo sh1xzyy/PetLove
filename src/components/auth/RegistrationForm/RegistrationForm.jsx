@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { usePasswordToggle } from "../../../hooks/usePasswordToggle";
@@ -19,9 +19,10 @@ const RegistrationForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: yupResolver(validationRegisterSchema),
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const onSubmit = async ({ name, email, password }) => {
@@ -37,36 +38,78 @@ const RegistrationForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full md:w-[424px]">
-      <div className="mb-[10px]">
+      <div className="relative mb-[10px]">
         <input
-          className="h-[42px] w-full rounded-[30px] border border-grey-15 px-[12px]"
+          className={`h-[42px] w-full rounded-[30px] border px-[12px] ${
+            errors.name
+              ? "border-error-red"
+              : watch("name")
+                ? "border-success-green"
+                : "border-grey-15"
+          } focus:border-accent-orange focus:outline-none`}
           type="text"
           placeholder="Name"
           autoComplete="off"
           {...register("name")}
         />
-        <div className="px-[12px] text-[10px] text-error-red">
-          {errors.name?.message}
-        </div>
+        {errors.name ? (
+          <svg className="absolute right-[12px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-failed-check`} />
+          </svg>
+        ) : watch("name") && !errors.name ? (
+          <svg className="absolute right-[12px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-success-check`} />
+          </svg>
+        ) : null}
+
+        {errors.name && (
+          <div className="px-[12px] text-[10px] text-error-red">
+            {errors.name.message}
+          </div>
+        )}
       </div>
 
-      <div className="mb-[10px]">
+      <div className="relative mb-[10px]">
         <input
-          className="h-[42px] w-full rounded-[30px] border border-grey-15 px-[12px]"
+          className={`h-[42px] w-full rounded-[30px] border px-[12px] ${
+            errors.email
+              ? "border-error-red"
+              : watch("email")
+                ? "border-success-green"
+                : "border-grey-15"
+          } focus:border-accent-orange focus:outline-none`}
           type="email"
           placeholder="Email"
           autoComplete="off"
           {...register("email")}
         />
-        <div className="px-[12px] text-[10px] text-error-red">
-          {errors.email?.message}
-        </div>
+        {errors.email ? (
+          <svg className="absolute right-[12px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-failed-check`} />
+          </svg>
+        ) : watch("email") && !errors.email ? (
+          <svg className="absolute right-[12px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-success-check`} />
+          </svg>
+        ) : null}
+
+        {errors.email && (
+          <div className="px-[12px] text-[10px] text-error-red">
+            {errors.email.message}
+          </div>
+        )}
       </div>
 
-      <div className="mb-[10px]">
+      <div className="relative mb-[10px]">
         <div className="relative">
           <input
-            className="h-[42px] w-full rounded-[30px] border border-grey-15 px-[12px]"
+            className={`h-[42px] w-full rounded-[30px] border px-[12px] ${
+              errors.password
+                ? "border-error-red"
+                : watch("password")
+                  ? "border-success-green"
+                  : "border-grey-15"
+            } focus:border-accent-orange focus:outline-none`}
             type={showPassword.pass1 ? "text" : "password"}
             placeholder="Password"
             autoComplete="new-password"
@@ -80,15 +123,33 @@ const RegistrationForm = () => {
           </span>
         </div>
 
-        <div className="px-[12px] text-[10px] text-error-red">
-          {errors.password?.message}
-        </div>
+        {errors.password ? (
+          <svg className="absolute right-[36px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-failed-check`} />
+          </svg>
+        ) : watch("password") && !errors.password ? (
+          <svg className="absolute right-[36px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-success-check`} />
+          </svg>
+        ) : null}
+
+        {errors.password && (
+          <div className="px-[12px] text-[10px] text-error-red">
+            {errors.password.message}
+          </div>
+        )}
       </div>
 
-      <div className="mb-[10px]">
+      <div className="relative mb-[10px]">
         <div className="relative">
           <input
-            className="h-[42px] w-full rounded-[30px] border border-grey-15 px-[12px]"
+            className={`h-[42px] w-full rounded-[30px] border px-[12px] ${
+              errors.confirmPassword
+                ? "border-error-red"
+                : watch("confirmPassword")
+                  ? "border-success-green"
+                  : "border-grey-15"
+            } focus:border-accent-orange focus:outline-none`}
             type={showPassword.pass2 ? "text" : "password"}
             placeholder="Confirm password"
             autoComplete="new-password"
@@ -102,9 +163,21 @@ const RegistrationForm = () => {
           </span>
         </div>
 
-        <div className="px-[12px] text-[10px] text-error-red">
-          {errors.confirmPassword?.message}
-        </div>
+        {errors.confirmPassword ? (
+          <svg className="absolute right-[36px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-failed-check`} />
+          </svg>
+        ) : watch("confirmPassword") && !errors.confirmPassword ? (
+          <svg className="absolute right-[36px] top-[21px] h-4 w-4 -translate-y-1/2">
+            <use href={`/icons/sprite.svg#icon-success-check`} />
+          </svg>
+        ) : null}
+
+        {errors.confirmPassword && (
+          <div className="px-[12px] text-[10px] text-error-red">
+            {errors.confirmPassword.message}
+          </div>
+        )}
       </div>
 
       <button

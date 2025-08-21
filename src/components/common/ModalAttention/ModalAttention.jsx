@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import BaseModal from "../BaseModal/BaseModal";
 import clsx from "clsx";
 import { buttonClass } from "./commonClasses/commonClasses";
@@ -14,7 +14,8 @@ const ModalAttention = ({ setIsModalOpen }) => {
           <img
             src="/common/other/dog@1x.png 1x"
             srcSet="/common/other/dog@1x.png 1x, /common/other/dog@2x.png 2x"
-            alt=""
+            alt="dog"
+            loading="lazy"
           />
         </div>
         <div className="mb-[24px] md:mb-[24px]">

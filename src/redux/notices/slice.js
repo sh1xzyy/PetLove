@@ -20,7 +20,7 @@ const initialState = {
   noticesFavorites: [],
 };
 
-const slice = createSlice({
+const noticesSlice = createSlice({
   name: "notices",
   initialState,
   reducers: {
@@ -95,5 +95,5 @@ const slice = createSlice({
   },
 });
 
-export const noticesReducer = slice.reducer;
-export const { clearPetsAdditionalInfo } = slice.actions;
+export const noticesReducer = noticesSlice.reducer;
+export const { clearPetsAdditionalInfo } = noticesSlice.actions;
