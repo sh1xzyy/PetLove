@@ -65,6 +65,7 @@ const NewsPage = () => {
                     }),
                   )
                 }
+                styles="mt-8"
               />
             </>
           )}

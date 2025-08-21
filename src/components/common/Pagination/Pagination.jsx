@@ -3,7 +3,7 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import clsx from "clsx";
 import { useState, useEffect } from "react";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange, styles }) => {
   const [maxPagesToShow, setMaxPagesToShow] = useState(3);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     clsx(isDisabled ? "text-gray-400" : "text-gray-900");
 
   return (
-    <div className="mt-8 flex items-center justify-center gap-2">
+    <div className={clsx("flex items-center justify-center gap-2", styles)}>
       {/* First */}
       <button
         onClick={() => handlePageChange(1)}

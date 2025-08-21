@@ -8,7 +8,7 @@ import {
   getPetsSpeciesThunk,
   removePetFromFavoritesThunk,
 } from "./operations";
-import { getPartOfCurrentUserInfoThunk } from "../users/operations";
+import { refreshUserThunk } from "../users/operations";
 
 const initialState = {
   isLoading: false,
@@ -18,6 +18,11 @@ const initialState = {
   species: [],
   petsAdditionalInfo: {},
   noticesFavorites: [],
+  pagination: {
+    page: 1,
+    perPage: 6,
+    totalPages: 0,
+  },
 };
 
 const noticesSlice = createSlice({
@@ -30,12 +35,17 @@ const noticesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getPartOfCurrentUserInfoThunk.fulfilled, (state, action) => {
+      .addCase(refreshUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.noticesFavorites = action.payload.noticesFavorites;
       })
       .addCase(getPetsNoticesThunk.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.pagination = {
+          page: action.payload.page,
+          perPage: action.payload.perPage,
+          totalPages: action.payload.totalPages,
+        };
         state.petsList = action.payload.results;
       })
       .addCase(getPetsCategoriesThunk.fulfilled, (state, action) => {
@@ -71,7 +81,7 @@ const noticesSlice = createSlice({
           getPetsAdditionalInfoThunk.rejected,
           addPetToFavoriteThunk.rejected,
           removePetFromFavoritesThunk.rejected,
-          getPartOfCurrentUserInfoThunk.rejected,
+          refreshUserThunk.rejected,
         ),
         (state) => {
           state.isLoading = false;
@@ -86,7 +96,7 @@ const noticesSlice = createSlice({
           getPetsAdditionalInfoThunk.pending,
           addPetToFavoriteThunk.pending,
           removePetFromFavoritesThunk.pending,
-          getPartOfCurrentUserInfoThunk.pending,
+          refreshUserThunk.pending,
         ),
         (state) => {
           state.isLoading = true;

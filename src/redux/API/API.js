@@ -31,26 +31,6 @@ export const uploadImageToCloudinary = async (formData) => {
   }
 };
 
-// Get current user
-export const getPartOfCurrentUserInfo = async (thunkAPI) => {
-  try {
-    const { token } = thunkAPI.getState().users;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue("No token");
-    }
-
-    const response = await axios.get(`${API_KEY}/users/current`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
 // Add Pet
 export const addPet = async (body, thunkAPI) => {
   try {
@@ -224,7 +204,6 @@ export const removePetFromFavorite = async (id, thunkAPI) => {
 // Fetch News
 export const fetchNews = async ({ keyword = "", page = 1, limit = 6 }) => {
   try {
-    console.log("fetchNews URL:", `${API_KEY}/news`);
     const response = await axios.get(`${API_KEY}/news`, {
       params: {
         keyword,

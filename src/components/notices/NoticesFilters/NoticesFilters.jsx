@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
 import { useFormSubmit } from "../../../features/notices/getPetsByFilter/useFormSubmit";
 import { useSelector } from "react-redux";
 import { selectOptionsSelector } from "../../../redux/notices/selectors";
@@ -7,13 +7,9 @@ import Selector from "./NoticeFiltersParts/Selector";
 import { useGetPetsOptions } from "../../../features/notices/getPetsOptions/useGetPetsOptions";
 import { useFiltersChange } from "../../../features/notices/getPetsByFilter/useFiltersChange.js";
 import SearchField from "../../common/SearchField/SearchField";
-import { defaultValues } from "../../../features/notices/getPetsByFilter/defaultValues";
 
-const NoticesFilters = () => {
+const NoticesFilters = ({ methods }) => {
   const { categories, sex, species } = useSelector(selectOptionsSelector);
-  const methods = useForm({
-    defaultValues,
-  });
   const { handleSearch, handleReset, onSubmit } = useFormSubmit(methods);
 
   useFiltersChange(methods);

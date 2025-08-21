@@ -13,6 +13,7 @@ export const selectNoticesFavoritesId = createSelector(
   (favorites) =>
     favorites.map((item) => (typeof item === "string" ? item : item._id)),
 );
+export const selectPaginationData = (state) => state.notices.pagination;
 
 export const selectOptionsSelector = createSelector(
   [selectPetsCategories, selectPetsSex, selectPetsSpecies],

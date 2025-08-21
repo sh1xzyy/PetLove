@@ -3,31 +3,34 @@ import Container from "../../components/common/Container/Container";
 import Title from "../../components/common/Title/Title";
 import NoticesFilters from "../../components/notices/NoticesFilters/NoticesFilters";
 import NoticesList from "../../components/notices/NoticesList/NoticesList";
-import { useDispatch, useSelector } from "react-redux";
-import { selectIsLoading } from "../../redux/notices/selectors";
+import { useSelector } from "react-redux";
+import {
+  selectIsLoading,
+  selectPaginationData,
+  selectPetsNoticesList,
+} from "../../redux/notices/selectors";
 import Loader from "../../components/common/Loader/Loader";
-import { useEffect } from "react";
-import { getPartOfCurrentUserInfoThunk } from "../../redux/users/operations";
-import toast from "react-hot-toast";
-import { selectIsLoggedIn } from "../../redux/users/selectors";
+import Pagination from "../../components/common/Pagination/Pagination";
+import NotFoundCards from "../../components/common/NotFoundCards/NotFoundCards";
+import { useFetchNotices } from "../../features/notices/getPetsByFilter/useFetchNotices";
+import { defaultValues } from "../../features/notices/getPetsByFilter/defaultValues";
+import { useForm } from "react-hook-form";
+import { useFormSubmit } from "../../features/notices/getPetsByFilter/useFormSubmit";
 
 const NoticesPage = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { page, totalPages } = useSelector(selectPaginationData);
+  const petsList = useSelector(selectPetsNoticesList);
   const isLoading = useSelector(selectIsLoading);
-  const dispatch = useDispatch();
+  const methods = useForm({
+    defaultValues,
+    shouldUnregister: false,
+  });
+  const { onSubmit } = useFormSubmit(methods);
+  const { watch } = methods;
+  const values = watch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(getPartOfCurrentUserInfoThunk()).unwrap();
-      } catch (error) {
-        toast.error(error);
-      }
-    };
-    if (isLoggedIn) {
-      fetchData();
-    }
-  }, [dispatch, isLoggedIn]);
+  useFetchNotices(defaultValues);
+
   return (
     <>
       {isLoading && <Loader />}
@@ -38,13 +41,31 @@ const NoticesPage = () => {
               text="Find your favorite pet"
               styles="mb-[40px] md:mb-[44px] lg:mb-[40px]"
             />
-            <NoticesFilters />
+            <NoticesFilters methods={methods} />
           </Container>
         </div>
         <div className="pt-[20px] md:pt-[16px] lg:pt-[20px]">
           <Container type="list">
-            <NoticesList />
-            <Outlet />
+            {petsList.length === 0 && !isLoading ? (
+              <NotFoundCards text="Nothing found for your parameters" />
+            ) : (
+              <>
+                <NoticesList petsList={petsList} />
+                {totalPages > 1 && (
+                  <Pagination
+                    currentPage={page}
+                    totalPages={totalPages}
+                    onPageChange={(newPage) => {
+                      onSubmit({ ...values, page: newPage, limit: 6 });
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    styles="mt-[44px] md:mt-[60px]"
+                  />
+                )}
+
+                <Outlet />
+              </>
+            )}
           </Container>
         </div>
       </section>
