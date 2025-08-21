@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return <header>{isLoggedIn ? <UserNav /> : <AuthNav />}</header>;
 };
 
