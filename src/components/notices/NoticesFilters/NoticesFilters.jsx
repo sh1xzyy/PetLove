@@ -68,7 +68,7 @@ const NoticesFilters = ({ methods }) => {
               />
             </div>
           </div>
-          <div className="flex flex-wrap gap-x-[10px] gap-y-[10px] md:gap-x-[8px] md:gap-y-[8px]">
+          <div>
             <SortOptionsRadioBtns />
           </div>
         </form>

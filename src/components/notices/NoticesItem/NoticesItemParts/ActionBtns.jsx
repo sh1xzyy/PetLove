@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { selectIsLoggedIn } from "../../../../redux/users/selectors";
 import { useToggleFavorite } from "../../../../features/favorites/toggleFavorite/useToggleFavorite";
+import { FaRegHeart } from "react-icons/fa";
 
 const ActionBtns = ({ id, setIsAttentionModalOpen }) => {
   const { toggleFavorite, isFavorite } = useToggleFavorite(id);
@@ -31,9 +32,7 @@ const ActionBtns = ({ id, setIsAttentionModalOpen }) => {
           !isLoggedIn ? setIsAttentionModalOpen(true) : toggleFavorite(id)
         }
       >
-        <svg className="h-[18px] w-[18px] stroke-accent-orange text-transparent">
-          <use href="/icons/sprite.svg#icon-heart"></use>
-        </svg>
+        <FaRegHeart size={18} color="var(--accent-orange)" />
       </button>
     </>
   );
